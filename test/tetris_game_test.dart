@@ -9,7 +9,7 @@ main() {
     (game) async {
       game.update(10);
 
-      expect(game.domino?.position.y, 300);
+      expect(game.domino?.position.y, 200);
     },
   );
 
@@ -20,7 +20,7 @@ main() {
       game.update(19);
       game.update(20);
 
-      expect(game.domino?.position.y, 570);
+      expect(game.domino?.position.y, 380);
     },
   );
 
