@@ -17,9 +17,22 @@ main() {
     "Domino stop when it reaches the bottom",
     () => TetrisGame(),
     (game) async {
-      game.update(30);
+      game.update(19);
+      game.update(20);
 
       expect(game.domino?.position.y, 570);
+    },
+  );
+
+  testWithGame(
+    "Show another falling domino when pre domino stop",
+    () => TetrisGame(),
+    (game) async {
+      game.update(19);
+      game.update(20);
+      game.update(21);
+
+      expect(game.children.length, 2);
     },
   );
 }
