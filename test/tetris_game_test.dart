@@ -7,9 +7,19 @@ main() {
     "Game start",
     () => TetrisGame(),
     (game) async {
+      game.update(10);
+
+      expect(game.domino?.position.y, 300);
+    },
+  );
+
+  testWithGame(
+    "Domino stop when it reaches the bottom",
+    () => TetrisGame(),
+    (game) async {
       game.update(30);
 
-      expect(game.domino?.position.y, 900);
+      expect(game.domino?.position.y, 570);
     },
   );
 }
