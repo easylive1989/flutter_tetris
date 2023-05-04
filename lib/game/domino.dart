@@ -3,6 +3,7 @@ import 'package:flutter_tetris/game/tetris_game.dart';
 
 class Domino extends RectangleComponent with HasGameRef<TetrisGame> {
   double _totalDelta = 0;
+  bool _isStop = false;
 
   Domino() : super(size: Vector2(20, 20));
 
@@ -18,7 +19,11 @@ class Domino extends RectangleComponent with HasGameRef<TetrisGame> {
       gameRef.dominoSlots[floor - 1][0] = false;
       gameRef.dominoSlots[floor][0] = true;
       position.y = 20.0 * floor;
-      game.add(Domino());
+    } else if (floor == 20) {
+      if (!_isStop) {
+        game.add(Domino());
+        _isStop = true;
+      }
     }
   }
 }
