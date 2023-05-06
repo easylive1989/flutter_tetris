@@ -12,18 +12,27 @@ class Domino extends RectangleComponent with HasGameRef<TetrisGame> {
     super.update(dt);
     _totalDelta += dt;
     var floor = _totalDelta.floor();
-    if (floor == 0) {
-      gameRef.dominoSlots[floor][0] = true;
-      position.y = 20.0 * floor;
-    } else if (floor < 20) {
-      gameRef.dominoSlots[floor - 1][0] = false;
-      gameRef.dominoSlots[floor][0] = true;
-      position.y = 20.0 * floor;
-    } else if (floor == 20) {
-      if (!_isStop) {
-        game.add(Domino());
-        _isStop = true;
-      }
+    position.y = 20.0 * floor;
+    if (floor > 19) {
+        gameRef.dominoSlots[19][0] = true;
+        position.y = 20.0 * 19;
+        if (!_isStop) {
+          game.add(Domino());
+          _isStop = true;
+        }
     }
+    // if (floor == 0) {
+    //   gameRef.dominoSlots[floor][0] = true;
+    //   position.y = 20.0 * floor;
+    // } else if (floor < 20) {
+    //   gameRef.dominoSlots[floor - 1][0] = false;
+    //   gameRef.dominoSlots[floor][0] = true;
+    //   position.y = 20.0 * floor;
+    // } else if (floor == 20) {
+    //   if (!_isStop) {
+    //     game.add(Domino());
+    //     _isStop = true;
+    //   }
+    // }
   }
 }
