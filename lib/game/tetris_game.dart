@@ -4,7 +4,7 @@ import 'package:flutter_tetris/game/domino.dart';
 import 'package:flutter_tetris/game/score.dart';
 
 class TetrisGame extends FlameGame {
-  final List<List<bool>> dominoSlots = List.generate(21, (i) {
+  List<List<bool>> dominoSlots = List.generate(21, (i) {
     return List.generate(10, (j) {
       return i == 20;
     }, growable: false);
@@ -22,7 +22,13 @@ class TetrisGame extends FlameGame {
   }
 
   Future restart() async {
+    overlays.remove(overlays.activeOverlays.first);
     removeAll(children.whereType<Domino>());
+    dominoSlots = List.generate(21, (i) {
+      return List.generate(10, (j) {
+        return i == 20;
+      }, growable: false);
+    }, growable: false);
     await add(Domino());
     score = 1;
     resumeEngine();

@@ -17,17 +17,25 @@ class MyApp extends StatelessWidget {
           game: TetrisGame(),
           overlayBuilderMap: {
             'gameOver': (BuildContext context, TetrisGame game) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text(
-                    'Game Over',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20.0,
+              return SizedBox(
+                width: 200,
+                height: 400,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Game Over',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.0,
+                      ),
                     ),
-                  ),
-                ],
+                    ElevatedButton(
+                      onPressed: game.restart,
+                      child: const Text('Play Again'),
+                    ),
+                  ],
+                ),
               );
             },
           },
