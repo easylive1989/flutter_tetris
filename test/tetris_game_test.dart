@@ -10,7 +10,7 @@ main() {
     (game) async {
       game.update(10);
 
-      expect(_getLastDomino(game).position.y, 200);
+      expect(lastDomino(game).position.y, 200);
       expect(game.score, 1);
     },
   );
@@ -22,7 +22,7 @@ main() {
       game.update(19);
       game.update(1);
 
-      expect(_getFirstDomino(game).position.y, 380);
+      expect(firstDomino(game).position.y, 380);
       expect(game.score, 2);
     },
   );
@@ -35,7 +35,7 @@ main() {
       game.update(1);
       game.update(1);
 
-      expect(game.children.length, 2);
+      expect(domino(game).length, 2);
     },
   );
 
@@ -47,21 +47,25 @@ main() {
 
       game.update(1);
 
-      expect(game.children.length, 2);
-      expect(_getLastDomino(game).position.y, 20);
+      expect(domino(game).length, 2);
+      expect(lastDomino(game).position.y, 20);
 
       game.update(17);
 
-      expect(_getLastDomino(game).position.y, 360);
+      expect(lastDomino(game).position.y, 360);
 
       game.update(1);
 
-      expect(game.children.length, 3);
-      expect(_getLastDomino(game).position.y, 20);
+      expect(domino(game).length, 3);
+      expect(lastDomino(game).position.y, 20);
     },
   );
 }
 
-Domino _getFirstDomino(TetrisGame game) => game.children.first as Domino;
+Domino firstDomino(TetrisGame game) =>
+    domino(game).first;
 
-Domino _getLastDomino(TetrisGame game) => game.children.last as Domino;
+Iterable<Domino> domino(TetrisGame game) => game.children.whereType<Domino>();
+
+Domino lastDomino(TetrisGame game) =>
+    domino(game).last;
