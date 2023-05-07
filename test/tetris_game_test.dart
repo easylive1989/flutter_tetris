@@ -11,6 +11,7 @@ main() {
       game.update(10);
 
       expect(_getLastDomino(game).position.y, 200);
+      expect(game.score, 1);
     },
   );
 
