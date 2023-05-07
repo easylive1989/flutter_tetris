@@ -1,12 +1,7 @@
 import 'package:flame/game.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_tetris/game/domino.dart';
 
 class TetrisGame extends FlameGame {
-  Domino? _domino;
-
-  @visibleForTesting
-  Domino? get domino => _domino;
 
   final List<List<bool>> dominoSlots = List.generate(
     20,
@@ -18,7 +13,6 @@ class TetrisGame extends FlameGame {
   Future onLoad() async {
     super.onLoad();
 
-    _domino = Domino();
-    add(_domino!);
+    add(Domino());
   }
 }

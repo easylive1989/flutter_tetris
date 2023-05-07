@@ -10,7 +10,7 @@ main() {
     (game) async {
       game.update(10);
 
-      expect(game.domino?.position.y, 200);
+      expect(_getLastDomino(game).position.y, 200);
     },
   );
 
@@ -21,7 +21,7 @@ main() {
       game.update(19);
       game.update(1);
 
-      expect(game.domino?.position.y, 380);
+      expect(_getFirstDomino(game).position.y, 380);
     },
   );
 
@@ -59,5 +59,7 @@ main() {
     },
   );
 }
+
+Domino _getFirstDomino(TetrisGame game) => game.children.first as Domino;
 
 Domino _getLastDomino(TetrisGame game) => game.children.last as Domino;
