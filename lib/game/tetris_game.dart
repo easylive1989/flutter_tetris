@@ -17,6 +17,6 @@ class TetrisGame extends FlameGame {
     super.onLoad();
 
     add(Domino());
-    add(Score(margin: const EdgeInsets.only(top: 10, left: 10)));
+    add(Score(margin: const EdgeInsets.only(top: 10, left: 200)));
   }
 }
