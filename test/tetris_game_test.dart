@@ -37,20 +37,27 @@ main() {
     },
   );
 
-  // testWithGame(
-  //   "Show another falling domino when pre domino stop",
-  //   () => TetrisGame(),
-  //   (game) async {
-  //     game.update(19);
-  //     game.update(1);
-  //     game.update(1);
-  //     game.update(17);
-  //     game.update(1);
-  //
-  //     expect(game.children.length, 2);
-  //     expect(_getLastDomino(game).position.y, 360);
-  //   },
-  // );
+  testWithGame(
+    "Show another falling domino when pre domino stop",
+    () => TetrisGame(),
+    (game) async {
+      game.update(19);
+
+      game.update(1);
+
+      expect(game.children.length, 2);
+      expect(_getLastDomino(game).position.y, 20);
+
+      game.update(17);
+
+      expect(_getLastDomino(game).position.y, 360);
+
+      game.update(1);
+
+      expect(game.children.length, 3);
+      expect(_getLastDomino(game).position.y, 20);
+    },
+  );
 }
 
 Domino _getLastDomino(TetrisGame game) => game.children.last as Domino;
