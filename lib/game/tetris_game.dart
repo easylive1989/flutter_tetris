@@ -20,4 +20,11 @@ class TetrisGame extends FlameGame {
     add(Domino());
     add(Score(margin: const EdgeInsets.only(top: 10, left: 200)));
   }
+
+  Future restart() async {
+    removeAll(children.whereType<Domino>());
+    await add(Domino());
+    score = 1;
+    resumeEngine();
+  }
 }

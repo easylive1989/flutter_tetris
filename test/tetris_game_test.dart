@@ -78,6 +78,25 @@ main() {
       expect(game.isGameOver, true);
     },
   );
+
+  testWithGame(
+    "Restart game",
+    () {
+      var tetrisGame = TetrisGame();
+      tetrisGame.overlays.addEntry("gameOver", (context, game) => SizedBox());
+      return tetrisGame;
+    },
+    (game) async {
+      for (var i = 19; i >= 0; i--) {
+        game.update(i.toDouble());
+      }
+
+      await game.restart();
+      game.update(0);
+
+      expect(domino(game).length, 1);
+    },
+  );
 }
 
 Domino firstDomino(TetrisGame game) =>
