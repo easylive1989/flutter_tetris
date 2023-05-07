@@ -11,6 +11,7 @@ class TetrisGame extends FlameGame {
   }, growable: false);
 
   int score = 1;
+  bool isGameOver = false;
 
   @override
   Future onLoad() async {

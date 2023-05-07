@@ -60,6 +60,19 @@ main() {
       expect(lastDomino(game).position.y, 20);
     },
   );
+
+  testWithGame(
+    "Game over",
+    () => TetrisGame(),
+    (game) async {
+      for (var i = 19; i >= 0; i--) {
+        game.update(i.toDouble());
+      }
+
+      expect(game.dominoSlots[0][0], true);
+      expect(game.isGameOver, true);
+    },
+  );
 }
 
 Domino firstDomino(TetrisGame game) =>
