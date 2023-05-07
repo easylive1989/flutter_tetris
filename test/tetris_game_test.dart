@@ -1,4 +1,5 @@
 import 'package:flame_test/flame_test.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_tetris/game/domino.dart';
 import 'package:flutter_tetris/game/tetris_game.dart';
@@ -63,7 +64,11 @@ main() {
 
   testWithGame(
     "Game over",
-    () => TetrisGame(),
+    () {
+      var tetrisGame = TetrisGame();
+      tetrisGame.overlays.addEntry("gameOver", (context, game) => SizedBox());
+      return tetrisGame;
+    },
     (game) async {
       for (var i = 19; i >= 0; i--) {
         game.update(i.toDouble());

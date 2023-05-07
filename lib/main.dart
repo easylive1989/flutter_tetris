@@ -15,6 +15,22 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         body: GameWidget(
           game: TetrisGame(),
+          overlayBuilderMap: {
+            'gameOver': (BuildContext context, TetrisGame game) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Text(
+                    'Game Over',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ],
+              );
+            },
+          },
         ),
       ),
     );
