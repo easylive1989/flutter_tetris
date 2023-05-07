@@ -23,6 +23,7 @@ main() {
       game.update(1);
 
       expect(_getFirstDomino(game).position.y, 380);
+      expect(game.score, 2);
     },
   );
 
