@@ -7,7 +7,7 @@ import 'package:flutter_tetris/game/tetris_game.dart';
 main() {
   testWithGame(
     "Game start",
-    () => TetrisGame(),
+    () => createTetrisGame(),
     (game) async {
       game.update(10);
 
@@ -18,7 +18,7 @@ main() {
 
   testWithGame(
     "Domino stop when it reaches the bottom",
-    () => TetrisGame(),
+    () => createTetrisGame(),
     (game) async {
       game.update(19);
       game.update(1);
@@ -30,7 +30,7 @@ main() {
 
   testWithGame(
     "Show another falling domino when pre domino stop",
-    () => TetrisGame(),
+    () => createTetrisGame(),
     (game) async {
       game.update(19);
       game.update(1);
@@ -42,7 +42,7 @@ main() {
 
   testWithGame(
     "Show another falling domino when pre domino stop",
-    () => TetrisGame(),
+    () => createTetrisGame(),
     (game) async {
       game.update(19);
 
@@ -64,11 +64,7 @@ main() {
 
   testWithGame(
     "Game over",
-    () {
-      var tetrisGame = TetrisGame();
-      tetrisGame.overlays.addEntry("gameOver", (context, game) => SizedBox());
-      return tetrisGame;
-    },
+    () => createTetrisGame(),
     (game) async {
       for (var i = 19; i >= 0; i--) {
         game.update(i.toDouble());
@@ -81,11 +77,7 @@ main() {
 
   testWithGame(
     "Restart game",
-    () {
-      var tetrisGame = TetrisGame();
-      tetrisGame.overlays.addEntry("gameOver", (context, game) => SizedBox());
-      return tetrisGame;
-    },
+    () => createTetrisGame(),
     (game) async {
       for (var i = 19; i >= 0; i--) {
         game.update(i.toDouble());
@@ -99,10 +91,16 @@ main() {
   );
 }
 
-Domino firstDomino(TetrisGame game) =>
-    domino(game).first;
+TetrisGame createTetrisGame() {
+  var tetrisGame = TetrisGame();
+  tetrisGame.overlays.addEntry("gameOver", (context, game) {
+    return const SizedBox();
+  });
+  return tetrisGame;
+}
+
+Domino firstDomino(TetrisGame game) => domino(game).first;
 
 Iterable<Domino> domino(TetrisGame game) => game.children.whereType<Domino>();
 
-Domino lastDomino(TetrisGame game) =>
-    domino(game).last;
+Domino lastDomino(TetrisGame game) => domino(game).last;
