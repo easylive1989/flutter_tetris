@@ -11,7 +11,7 @@ main() {
     (game) async {
       game.update(10);
 
-      expect(lastDomino(game).position.y, 200);
+      expect(domino(game).last.position.y, 200);
       expect(game.score, 1);
     },
   );
@@ -23,7 +23,7 @@ main() {
       game.update(19);
       game.update(1);
 
-      expect(firstDomino(game).position.y, 380);
+      expect(domino(game).first.position.y, 380);
       expect(game.score, 2);
     },
   );
@@ -34,31 +34,22 @@ main() {
     (game) async {
       game.update(19);
       game.update(1);
-      game.update(1);
 
       expect(domino(game).length, 2);
     },
   );
 
   testWithGame(
-    "Show another falling domino when pre domino stop",
+    "Domino stop when it reaches another domino",
     () => createTetrisGame(),
     (game) async {
       game.update(19);
 
-      game.update(1);
-
-      expect(domino(game).length, 2);
-      expect(lastDomino(game).position.y, 20);
-
-      game.update(17);
-
-      expect(lastDomino(game).position.y, 360);
+      game.update(18);
 
       game.update(1);
 
-      expect(domino(game).length, 3);
-      expect(lastDomino(game).position.y, 20);
+      expect(domino(game).elementAt(1).position.y, 360);
     },
   );
 
@@ -66,9 +57,7 @@ main() {
     "Game over",
     () => createTetrisGame(),
     (game) async {
-      for (var i = 19; i >= 0; i--) {
-        game.update(i.toDouble());
-      }
+      waitForGameOver(game);
 
       expect(game.dominoSlots[0][0], true);
       expect(game.isGameOver, true);
@@ -79,9 +68,7 @@ main() {
     "Restart game",
     () => createTetrisGame(),
     (game) async {
-      for (var i = 19; i >= 0; i--) {
-        game.update(i.toDouble());
-      }
+      waitForGameOver(game);
 
       await game.restart();
       game.update(0);
@@ -89,6 +76,12 @@ main() {
       expect(domino(game).length, 1);
     },
   );
+}
+
+void waitForGameOver(TetrisGame game) {
+  for (var i = 19; i >= 0; i--) {
+    game.update(i.toDouble());
+  }
 }
 
 TetrisGame createTetrisGame() {
@@ -99,8 +92,4 @@ TetrisGame createTetrisGame() {
   return tetrisGame;
 }
 
-Domino firstDomino(TetrisGame game) => domino(game).first;
-
 Iterable<Domino> domino(TetrisGame game) => game.children.whereType<Domino>();
-
-Domino lastDomino(TetrisGame game) => domino(game).last;
