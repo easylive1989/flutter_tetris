@@ -6,6 +6,7 @@ import 'package:flutter_tetris/game/score.dart';
 class TetrisGame extends FlameGame {
   DominoManager? _dominoManager;
 
+  @visibleForTesting
   DominoManager get dominoManager => _dominoManager!;
 
   int get score => _dominoManager?.dominoCount ?? 0;
