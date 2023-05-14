@@ -83,7 +83,7 @@ main() {
 void waitForGameOver(TetrisGame game) {
   for (var i = 19; i >= 0; i--) {
     game.update(i.toDouble());
-    game.update(1);
+    game.update(0);
   }
 }
 
