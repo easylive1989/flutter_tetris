@@ -59,7 +59,7 @@ main() {
     (game) async {
       waitForGameOver(game);
 
-      expect(game.dominoSlots[0][0], true);
+      expect(game.dominoManager.dominoSlots[0][0], true);
       expect(game.isGameOver, true);
     },
   );
