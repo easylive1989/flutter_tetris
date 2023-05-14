@@ -20,8 +20,12 @@ class DominoBoard extends Component with HasGameRef<TetrisGame> {
     var lastDomino = children.last as Domino;
 
     if (lastDomino.floor == 19 || isReachOtherDomino(lastDomino)) {
-      add(Domino());
       lastDomino.stop();
+      var sameRowDomino = children.whereType<Domino>().where((domino) => domino.floor == lastDomino.floor && domino.isStop);
+      if (sameRowDomino.length == 10) {
+        removeAll(sameRowDomino);
+      }
+      add(Domino());
     }
   }
 

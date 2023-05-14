@@ -67,16 +67,18 @@ main() {
     setUp: (game, tester) async => game,
     verify: (game, tester) async {
       game.update(19);
+      game.update(0);
 
-      for (var i = 0; i < 9; i++) {
+      for (var i = 1; i < 10; i++) {
+        game.update(10);
+        await pressKey(tester, game, LogicalKeyboardKey.arrowRight, i);
+        game.update(9);
         game.update(0);
-        await pressKey(tester, game, LogicalKeyboardKey.arrowRight, 12);
-        game.update(19);
       }
 
-      expect(domino(game).length, 0);
+      game.update(0);
+      expect(domino(game).length, 1);
     },
-    skip: true
   );
 }
 
