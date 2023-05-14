@@ -3,11 +3,6 @@ import 'package:flutter_tetris/game/domino.dart';
 import 'package:flutter_tetris/game/tetris_game.dart';
 
 class DominoBoard extends Component with HasGameRef<TetrisGame> {
-  final List<List<bool>> _dominoSlots = List.generate(21, (i) {
-    return List.generate(10, (j) {
-      return i == 20;
-    }, growable: false);
-  }, growable: false);
 
   @override
   Future onLoad() async {
@@ -17,7 +12,7 @@ class DominoBoard extends Component with HasGameRef<TetrisGame> {
 
   int get dominoCount => children.length;
 
-  bool get isDominoReachTop => _dominoSlots[0].any((slot) => slot);
+  bool get isDominoReachTop => children.whereType<Domino>().any((domino) => domino.floor == 0 && domino.isStop);
 
   @override
   void update(double dt) {
@@ -25,7 +20,6 @@ class DominoBoard extends Component with HasGameRef<TetrisGame> {
     var lastDomino = children.last as Domino;
 
     if (lastDomino.floor == 19 || isReachOtherDomino(lastDomino)) {
-      _dominoSlots[lastDomino.floor][lastDomino.column] = true;
       add(Domino());
       lastDomino.stop();
     }

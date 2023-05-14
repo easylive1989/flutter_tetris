@@ -14,6 +14,8 @@ class Domino extends RectangleComponent with HasGameRef<TetrisGame>, KeyboardHan
 
   int get column => (position.x / _dominoSize).floor();
 
+  bool get isStop => _isStop;
+
   @override
   bool onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
     if (_isStop) return super.onKeyEvent(event, keysPressed);
