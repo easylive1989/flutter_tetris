@@ -23,11 +23,14 @@ class DominoBoard extends Component with HasGameRef<TetrisGame> {
   void update(double dt) {
     super.update(dt);
     var lastDomino = children.last as Domino;
-    if (_dominoSlots[lastDomino.floor + 1][lastDomino.column]) {
+
+    if (lastDomino.floor == 19 || isReachOtherDomino(lastDomino)) {
       _dominoSlots[lastDomino.floor][lastDomino.column] = true;
       add(Domino());
       lastDomino.stop();
     }
   }
+
+  bool isReachOtherDomino(Domino lastDomino) => children.whereType<Domino>().any((domino) => domino.floor == lastDomino.floor + 1 && domino.column == lastDomino.column );
 
 }
