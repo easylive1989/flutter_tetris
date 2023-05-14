@@ -1,9 +1,10 @@
+import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_tetris/game/domino_manger.dart';
 import 'package:flutter_tetris/game/score.dart';
 
-class TetrisGame extends FlameGame {
+class TetrisGame extends FlameGame with HasKeyboardHandlerComponents {
   DominoManager? _dominoManager;
 
   @visibleForTesting

@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flame_test/flame_test.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -26,7 +24,6 @@ main() {
 
       expect(domino(game).last.position.x, 20);
     },
-    skip: true,
   );
 }
 
