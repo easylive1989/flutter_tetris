@@ -61,6 +61,23 @@ main() {
       expect(domino(game).first.position.x, 180);
     },
   );
+
+  flameTester.testGameWidget(
+    "Eliminate domino when domino stop in one row",
+    setUp: (game, tester) async => game,
+    verify: (game, tester) async {
+      game.update(19);
+
+      for (var i = 0; i < 9; i++) {
+        game.update(0);
+        await pressKey(tester, game, LogicalKeyboardKey.arrowRight, 12);
+        game.update(19);
+      }
+
+      expect(domino(game).length, 0);
+    },
+    skip: true
+  );
 }
 
 Future<void> pressKey(
