@@ -34,6 +34,7 @@ main() {
     (game) async {
       game.update(19);
       game.update(1);
+      game.update(1);
 
       expect(domino(game).length, 2);
     },
@@ -44,10 +45,10 @@ main() {
     () => createTetrisGame(),
     (game) async {
       game.update(19);
-
-      game.update(18);
-
       game.update(1);
+      game.update(18);
+      game.update(1);
+
 
       expect(domino(game).elementAt(1).position.y, 360);
     },
@@ -82,6 +83,7 @@ main() {
 void waitForGameOver(TetrisGame game) {
   for (var i = 19; i >= 0; i--) {
     game.update(i.toDouble());
+    game.update(1);
   }
 }
 

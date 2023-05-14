@@ -14,4 +14,20 @@ class DominoManager extends Component with HasGameRef<TetrisGame> {
     super.onLoad();
     add(Domino());
   }
+
+  @override
+  void update(double dt) {
+    super.update(dt);
+    var lastDomino = children.last as Domino;
+    if (dominoSlots[lastDomino.floor + 1][0]) {
+      dominoSlots[lastDomino.floor][0] = true;
+      if (dominoSlots[0][0]) {
+        gameRef.isGameOver = true;
+        return;
+      }
+      add(Domino());
+      gameRef.score += 1;
+      lastDomino.stop();
+    }
+  }
 }
