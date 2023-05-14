@@ -31,6 +31,7 @@ main() {
     verify: (game, tester) async {
       game.update(19);
       game.update(1);
+      game.update(10);
 
       await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
 
@@ -38,12 +39,11 @@ main() {
       await tester.pumpAndSettle();
       game.resumeEngine();
 
-      game.update(18);
+      game.update(8);
       game.update(1);
 
       expect(domino(game).elementAt(1).position.y, 380);
     },
-    skip: true
   );
 }
 

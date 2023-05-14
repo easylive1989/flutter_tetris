@@ -10,7 +10,9 @@ class Domino extends RectangleComponent with HasGameRef<TetrisGame>, KeyboardHan
 
   Domino() : super(size: Vector2(_dominoSize, _dominoSize));
 
+  int get floor => _totalDelta.floor();
 
+  int get column => (position.x / _dominoSize).floor();
 
   @override
   bool onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
@@ -34,7 +36,6 @@ class Domino extends RectangleComponent with HasGameRef<TetrisGame>, KeyboardHan
     position.y = _dominoSize * floor;
   }
 
-  int get floor => _totalDelta.floor();
 
   void stop() {
     _isStop = true;
