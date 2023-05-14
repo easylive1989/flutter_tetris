@@ -18,7 +18,7 @@ class Domino extends RectangleComponent with HasGameRef<TetrisGame>, KeyboardHan
   bool onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
     if (_isStop) return super.onKeyEvent(event, keysPressed);
 
-    if (event.isKeyPressed(LogicalKeyboardKey.arrowRight)) {
+    if (event.isKeyPressed(LogicalKeyboardKey.arrowRight) && position.x < _dominoSize * 9) {
       position.x += _dominoSize;
     } else if (event.isKeyPressed(LogicalKeyboardKey.arrowLeft) && position.x > 0) {
       position.x -= _dominoSize;

@@ -47,7 +47,7 @@ main() {
   );
 
   flameTester.testGameWidget(
-    "Domino can't move less than 0",
+    "Domino can't move less than 0 column",
     setUp: (game, tester) async => game,
     verify: (game, tester) async {
       game.update(10);
@@ -61,6 +61,25 @@ main() {
       expect(domino(game).first.position.x, 0);
     },
   );
+
+  flameTester.testGameWidget(
+    "Domino can't move large than 9 column",
+    setUp: (game, tester) async => game,
+    verify: (game, tester) async {
+      game.update(10);
+
+      for (var i = 0; i < 12; i++) {
+        await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
+      }
+
+      game.pauseEngine();
+      await tester.pumpAndSettle();
+      game.resumeEngine();
+
+      expect(domino(game).first.position.x, 180);
+    },
+  );
 }
 
-Iterable<Domino> domino(TetrisGame game) => game.dominoManager.children.whereType<Domino>();
+Iterable<Domino> domino(TetrisGame game) =>
+    game.dominoManager.children.whereType<Domino>();
