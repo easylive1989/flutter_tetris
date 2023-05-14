@@ -13,7 +13,6 @@ main() {
     verify: (game, tester) async {
       game.update(10);
 
-      await tester.tapAt(Offset.zero);
       await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
 
       game.pauseEngine();
@@ -22,8 +21,29 @@ main() {
 
       game.update(1);
 
-      expect(domino(game).last.position.x, 20);
+      expect(domino(game).first.position.x, 20);
     },
+  );
+
+  flameTester.testGameWidget(
+    "Second domino should reach the bottom when it moves to another column",
+    setUp: (game, tester) async => game,
+    verify: (game, tester) async {
+      game.update(19);
+      game.update(1);
+
+      await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
+
+      game.pauseEngine();
+      await tester.pumpAndSettle();
+      game.resumeEngine();
+
+      game.update(18);
+      game.update(1);
+
+      expect(domino(game).elementAt(1).position.y, 380);
+    },
+    skip: true
   );
 }
 
