@@ -92,4 +92,4 @@ TetrisGame createTetrisGame() {
   return tetrisGame;
 }
 
-Iterable<Domino> domino(TetrisGame game) => game.children.whereType<Domino>();
+Iterable<Domino> domino(TetrisGame game) => game.dominoManager.children.whereType<Domino>();

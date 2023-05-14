@@ -25,7 +25,7 @@ class Domino extends RectangleComponent with HasGameRef<TetrisGame> {
         gameRef.pauseEngine();
         return;
       }
-      gameRef.add(Domino());
+      gameRef.dominoManager.add(Domino());
       gameRef.score += 1;
       _isStop = true;
     }
