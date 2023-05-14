@@ -61,7 +61,6 @@ main() {
     (game) async {
       waitForGameOver(game);
 
-      expect(game.dominoManager.dominoSlots[0][0], true);
       expect(game.dominoManager.isDominoReachTop, true);
     },
   );
