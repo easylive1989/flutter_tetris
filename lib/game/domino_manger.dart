@@ -23,12 +23,10 @@ class DominoManager extends Component with HasGameRef<TetrisGame> {
     var lastDomino = children.last as Domino;
     if (dominoSlots[lastDomino.floor + 1][0]) {
       dominoSlots[lastDomino.floor][0] = true;
-      if (dominoSlots[0][0]) {
-        gameRef.isGameOver = true;
-        return;
-      }
       add(Domino());
       lastDomino.stop();
     }
   }
+
+  bool get isDominoReachTop => dominoSlots[0][0];
 }

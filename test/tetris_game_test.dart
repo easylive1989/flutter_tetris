@@ -62,7 +62,7 @@ main() {
       waitForGameOver(game);
 
       expect(game.dominoManager.dominoSlots[0][0], true);
-      expect(game.isGameOver, true);
+      expect(game.dominoManager.isDominoReachTop, true);
     },
   );
 
@@ -76,7 +76,7 @@ main() {
       game.update(0);
 
       expect(domino(game).length, 1);
-      expect(game.isGameOver, false);
+      expect(game.dominoManager.isDominoReachTop, false);
     },
   );
 }
