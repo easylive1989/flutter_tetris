@@ -10,7 +10,9 @@ class DominoBoard extends Component with HasGameRef<TetrisGame> {
     add(Domino());
   }
 
-  int get dominoCount => children.length;
+  int _eliminateCount = 0;
+
+  int get dominoCount => children.length + _eliminateCount * 10;
 
   bool get isDominoReachTop => children.whereType<Domino>().any((domino) => domino.floor == 0 && domino.isStop);
 
@@ -24,6 +26,7 @@ class DominoBoard extends Component with HasGameRef<TetrisGame> {
       var sameRowDomino = children.whereType<Domino>().where((domino) => domino.floor == lastDomino.floor && domino.isStop);
       if (sameRowDomino.length == 10) {
         removeAll(sameRowDomino);
+        _eliminateCount++;
       }
       add(Domino());
     }

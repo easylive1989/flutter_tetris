@@ -78,6 +78,7 @@ main() {
 
       game.update(0);
       expect(domino(game).length, 1);
+      expect(game.score, 11);
     },
   );
 }
