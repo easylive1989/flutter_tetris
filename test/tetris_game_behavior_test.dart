@@ -13,11 +13,7 @@ main() {
     verify: (game, tester) async {
       game.update(10);
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
-
-      game.pauseEngine();
-      await tester.pumpAndSettle();
-      game.resumeEngine();
+      await pressKey(tester, game, LogicalKeyboardKey.arrowRight, 1);
 
       game.update(1);
 
@@ -33,11 +29,7 @@ main() {
       game.update(1);
       game.update(10);
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
-
-      game.pauseEngine();
-      await tester.pumpAndSettle();
-      game.resumeEngine();
+      await pressKey(tester, game, LogicalKeyboardKey.arrowRight, 1);
 
       game.update(8);
       game.update(1);
@@ -52,11 +44,7 @@ main() {
     verify: (game, tester) async {
       game.update(10);
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.arrowLeft);
-
-      game.pauseEngine();
-      await tester.pumpAndSettle();
-      game.resumeEngine();
+      await pressKey(tester, game, LogicalKeyboardKey.arrowLeft, 1);
 
       expect(domino(game).first.position.x, 0);
     },
@@ -68,17 +56,26 @@ main() {
     verify: (game, tester) async {
       game.update(10);
 
-      for (var i = 0; i < 12; i++) {
-        await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
-      }
-
-      game.pauseEngine();
-      await tester.pumpAndSettle();
-      game.resumeEngine();
+      await pressKey(tester, game, LogicalKeyboardKey.arrowRight, 12);
 
       expect(domino(game).first.position.x, 180);
     },
   );
+}
+
+Future<void> pressKey(
+  WidgetTester tester,
+  TetrisGame game,
+  LogicalKeyboardKey key,
+  int times,
+) async {
+  for (var i = 0; i < times; i++) {
+    await tester.sendKeyEvent(key);
+  }
+
+  game.pauseEngine();
+  await tester.pumpAndSettle();
+  game.resumeEngine();
 }
 
 Iterable<Domino> domino(TetrisGame game) =>
