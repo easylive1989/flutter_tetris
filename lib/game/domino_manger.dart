@@ -17,7 +17,7 @@ class DominoManager extends Component with HasGameRef<TetrisGame> {
 
   int get dominoCount => children.length;
 
-  bool get isDominoReachTop => _dominoSlots[0][0];
+  bool get isDominoReachTop => _dominoSlots[0].any((slot) => slot);
 
   @override
   void update(double dt) {
