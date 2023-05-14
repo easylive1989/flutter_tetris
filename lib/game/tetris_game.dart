@@ -23,6 +23,16 @@ class TetrisGame extends FlameGame {
     removeAll(children.whereType<DominoManager>());
     add(_dominoManager = DominoManager());
     score = 1;
+    isGameOver = false;
     resumeEngine();
+  }
+
+  @override
+  void update(double dt) {
+    super.update(dt);
+    if (isGameOver) {
+      overlays.add('gameOver');
+      pauseEngine();
+    }
   }
 }
