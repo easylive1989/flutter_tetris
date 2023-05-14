@@ -45,6 +45,22 @@ main() {
       expect(domino(game).elementAt(1).position.y, 380);
     },
   );
+
+  flameTester.testGameWidget(
+    "Domino can't move less than 0",
+    setUp: (game, tester) async => game,
+    verify: (game, tester) async {
+      game.update(10);
+
+      await tester.sendKeyEvent(LogicalKeyboardKey.arrowLeft);
+
+      game.pauseEngine();
+      await tester.pumpAndSettle();
+      game.resumeEngine();
+
+      expect(domino(game).first.position.x, 0);
+    },
+  );
 }
 
 Iterable<Domino> domino(TetrisGame game) => game.dominoManager.children.whereType<Domino>();
