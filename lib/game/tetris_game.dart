@@ -4,11 +4,12 @@ import 'package:flutter_tetris/game/domino_manger.dart';
 import 'package:flutter_tetris/game/score.dart';
 
 class TetrisGame extends FlameGame {
-  int score = 1;
   bool isGameOver = false;
   DominoManager? _dominoManager;
 
   DominoManager get dominoManager => _dominoManager!;
+
+  int get score => _dominoManager?.dominoCount ?? 0;
 
   @override
   Future onLoad() async {
@@ -22,7 +23,6 @@ class TetrisGame extends FlameGame {
     overlays.remove(overlays.activeOverlays.first);
     removeAll(children.whereType<DominoManager>());
     add(_dominoManager = DominoManager());
-    score = 1;
     isGameOver = false;
     resumeEngine();
   }

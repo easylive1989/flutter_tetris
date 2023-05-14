@@ -22,6 +22,7 @@ main() {
     (game) async {
       game.update(19);
       game.update(1);
+      game.update(1);
 
       expect(domino(game).first.position.y, 380);
       expect(game.score, 2);

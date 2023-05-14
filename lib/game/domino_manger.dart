@@ -15,6 +15,8 @@ class DominoManager extends Component with HasGameRef<TetrisGame> {
     add(Domino());
   }
 
+  int get dominoCount => children.length;
+
   @override
   void update(double dt) {
     super.update(dt);
@@ -26,7 +28,6 @@ class DominoManager extends Component with HasGameRef<TetrisGame> {
         return;
       }
       add(Domino());
-      gameRef.score += 1;
       lastDomino.stop();
     }
   }
