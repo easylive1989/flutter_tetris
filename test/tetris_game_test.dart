@@ -61,7 +61,7 @@ main() {
     (game) async {
       waitForGameOver(game);
 
-      expect(game.dominoManager.isDominoReachTop, true);
+      expect(game.dominoBoard.isDominoReachTop, true);
     },
   );
 
@@ -75,7 +75,7 @@ main() {
       game.update(0);
 
       expect(domino(game).length, 1);
-      expect(game.dominoManager.isDominoReachTop, false);
+      expect(game.dominoBoard.isDominoReachTop, false);
     },
   );
 }
@@ -95,4 +95,4 @@ TetrisGame createTetrisGame() {
   return tetrisGame;
 }
 
-Iterable<Domino> domino(TetrisGame game) => game.dominoManager.children.whereType<Domino>();
+Iterable<Domino> domino(TetrisGame game) => game.dominoBoard.children.whereType<Domino>();

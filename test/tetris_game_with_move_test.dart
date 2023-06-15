@@ -99,4 +99,4 @@ Future<void> pressKey(
 }
 
 Iterable<Domino> domino(TetrisGame game) =>
-    game.dominoManager.children.whereType<Domino>();
+    game.dominoBoard.children.whereType<Domino>();
