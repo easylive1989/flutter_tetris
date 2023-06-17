@@ -72,6 +72,8 @@ main() {
     verify: (game, tester) async {
       game.update(19);
       game.update(0);
+      game.update(18);
+      game.update(0);
 
       for (var i = 1; i < 10; i++) {
         game.update(10);
@@ -81,8 +83,9 @@ main() {
       }
 
       game.update(0);
-      expect(domino(game).length, 1);
-      expect(game.score, 11);
+      expect(domino(game).length, 2);
+      expect(domino(game).first.position, Vector2(0, 380));
+      expect(game.score, 12);
     },
   );
 }

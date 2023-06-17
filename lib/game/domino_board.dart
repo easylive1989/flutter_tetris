@@ -40,11 +40,19 @@ class DominoBoard extends Component with HasGameRef<TetrisGame> {
           var dominoes = _sameRowDominoes(domino);
           if (dominoes.length == _column) {
             _eliminate(dominoes);
+            _adjustDominoPosition(domino.floor);
           }
         }
         _dominoGenerator.generate(this);
         break;
       }
+    }
+  }
+
+  void _adjustDominoPosition( int eliminateRow) {
+    var dominoesAboveEliminateRow = children.whereType<Domino>().where((domino) => domino.floor < eliminateRow);
+    for (var domino in dominoesAboveEliminateRow) {
+      domino.position.y += 20;
     }
   }
 
