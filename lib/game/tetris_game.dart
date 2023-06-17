@@ -8,6 +8,7 @@ import 'package:flutter_tetris/game/domino_generator.dart';
 import 'package:flutter_tetris/game/score.dart';
 
 class TetrisGame extends FlameGame with HasKeyboardHandlerComponents {
+  DominoGenerator? _dominoGenerator;
   DominoBoard? _dominoBoard;
 
   @visibleForTesting
@@ -15,19 +16,23 @@ class TetrisGame extends FlameGame with HasKeyboardHandlerComponents {
 
   int get score => _dominoBoard?.dominoCount ?? 0;
 
+  TetrisGame({DominoGenerator? dominoGenerator}) {
+    _dominoGenerator = dominoGenerator ?? SquadDominoGenerator();
+  }
+
   @override
   Future onLoad() async {
     super.onLoad();
 
     add(DominoBoardBorder());
-    add(_dominoBoard = DominoBoard(SquadDominoGenerator()));
+    add(_dominoBoard = DominoBoard(_dominoGenerator!));
     add(Score(margin: const EdgeInsets.only(top: 5, left: 210)));
   }
 
   Future restart() async {
     overlays.remove(overlays.activeOverlays.first);
     removeAll(children.whereType<DominoBoard>());
-    add(_dominoBoard = DominoBoard(SquadDominoGenerator()));
+    add(_dominoBoard = DominoBoard(_dominoGenerator!));
     resumeEngine();
   }
 

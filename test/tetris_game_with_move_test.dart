@@ -1,11 +1,15 @@
+import 'package:flame/components.dart';
 import 'package:flame_test/flame_test.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_tetris/game/domino.dart';
+import 'package:flutter_tetris/game/domino_generator.dart';
 import 'package:flutter_tetris/game/tetris_game.dart';
 
 main() {
-  final flameTester = FlameTester(() => TetrisGame());
+  final flameTester = FlameTester(() {
+    return TetrisGame(dominoGenerator: SingleDominoGenerator());
+  });
 
   flameTester.testGameWidget(
     "Move domino to right",
@@ -25,16 +29,16 @@ main() {
     "Second domino should reach the bottom when it moves to another column",
     setUp: (game, tester) async => game,
     verify: (game, tester) async {
-      game.update(18);
+      game.update(19);
       game.update(1);
       game.update(10);
 
       await pressKey(tester, game, LogicalKeyboardKey.arrowRight, 1);
 
-      game.update(8);
+      game.update(9);
       game.update(1);
 
-      expect(stopDomino(game)[4].position.y, 360);
+      expect(stopDomino(game)[1].position.y, 380);
     },
   );
 
@@ -66,19 +70,19 @@ main() {
     "Eliminate domino when domino stop in one row",
     setUp: (game, tester) async => game,
     verify: (game, tester) async {
-      game.update(18);
+      game.update(19);
       game.update(0);
 
-      for (var i = 1; i < 5; i++) {
+      for (var i = 1; i < 10; i++) {
         game.update(10);
         await pressKey(tester, game, LogicalKeyboardKey.arrowRight, i);
-        game.update(8);
+        game.update(9);
         game.update(0);
       }
 
       game.update(0);
-      expect(domino(game).length, 4);
-      expect(game.score, 24);
+      expect(domino(game).length, 1);
+      expect(game.score, 11);
     },
   );
 }
@@ -105,3 +109,10 @@ List<Domino> stopDomino(TetrisGame game) => game.dominoBoard.children
     .whereType<Domino>()
     .where((domino) => domino.isStop)
     .toList();
+
+class SingleDominoGenerator extends DominoGenerator {
+  @override
+  void generate(Component board) {
+    board.add(Domino());
+  }
+}
