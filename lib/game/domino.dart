@@ -8,7 +8,7 @@ class Domino extends RectangleComponent with HasGameRef<TetrisGame>, KeyboardHan
   double _totalDelta = 0;
   bool _isStop = false;
 
-  Domino() : super(size: Vector2(_dominoSize, _dominoSize));
+  Domino({super.position}) : super(size: Vector2(_dominoSize, _dominoSize));
 
   int get floor => (position.y / _dominoSize).floor();
 
