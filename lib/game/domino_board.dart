@@ -23,22 +23,16 @@ class DominoBoard extends Component
   @override
   bool onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
     var movingDominoes = _getMovingDominoes();
-    var stoppedDominoes =
-        children.whereType<Domino>().where((domino) => domino.isStop);
+    var stoppedDominoes = _getStoppedDominoes();
     if (event.isKeyPressed(LogicalKeyboardKey.arrowRight) &&
-        movingDominoes.every((domino) => domino.position.x < 180) &&
-        movingDominoes.every((domino) => !stoppedDominoes.any((stoppedDomino) =>
-            stoppedDomino.position.x == domino.position.x + 20 &&
-            stoppedDomino.floor == domino.floor))) {
+        movingDominoes.every((domino) => domino.isRightOfBoundary) &&
+        movingDominoes.every((domino) => !domino.isRightOf(stoppedDominoes))) {
       for (var domino in movingDominoes) {
         domino.position.x += 20;
       }
     } else if (event.isKeyPressed(LogicalKeyboardKey.arrowLeft) &&
-        movingDominoes.every((domino) => domino.position.x > 0) &&
-        movingDominoes.every((domino) => !stoppedDominoes.any(
-        (stoppedDomino) =>
-            stoppedDomino.position.x == domino.position.x - 20 &&
-            stoppedDomino.floor == domino.floor))) {
+        movingDominoes.every((domino) => domino.isLeftOfBoundary) &&
+        movingDominoes.every((domino) => !domino.isLeftOf(stoppedDominoes))) {
       for (var domino in movingDominoes) {
         domino.position.x -= 20;
       }
@@ -46,6 +40,9 @@ class DominoBoard extends Component
 
     return super.onKeyEvent(event, keysPressed);
   }
+
+  Iterable<Domino> _getStoppedDominoes() =>
+      children.whereType<Domino>().where((domino) => domino.isStop);
 
   int _eliminateCount = 0;
 

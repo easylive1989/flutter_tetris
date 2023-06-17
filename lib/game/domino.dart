@@ -15,6 +15,22 @@ class Domino extends RectangleComponent with HasGameRef<TetrisGame> {
 
   bool get isStop => _isStop;
 
+  bool isRightOf(Iterable<Domino> dominoes) =>
+      dominoes.any((domino) => _isRightOf(domino));
+
+  bool _isRightOf(Domino domino) =>
+      domino.position.x >= position.x + _dominoSize && floor == domino.floor;
+
+  bool isLeftOf(Iterable<Domino> dominoes) =>
+      dominoes.any((domino) => _isLeftOf(domino));
+
+  bool _isLeftOf(Domino domino) =>
+      domino.position.x <= position.x - _dominoSize && floor == domino.floor;
+
+  bool get isRightOfBoundary => position.x < 180;
+
+  bool get isLeftOfBoundary => position.x > 0;
+
   @override
   void update(double dt) {
     super.update(dt);
