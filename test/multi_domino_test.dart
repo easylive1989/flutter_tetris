@@ -10,7 +10,7 @@ main() {
     "2 x 1 domino should stop when reach the bottom",
     () => FlameGame(),
     (game) async {
-      var dominoBoard = DominoBoard(SquadDominoGenerator());
+      var dominoBoard = DominoBoard(TetrominoOGenerator());
       await game.ensureAdd(dominoBoard);
       await dominoBoard.ensureAdd(Domino(position: Vector2(0, 0)));
       await dominoBoard.ensureAdd(Domino(position: Vector2(0, 20)));
@@ -29,7 +29,7 @@ main() {
     "squad domino should stop when reach the bottom",
     () => FlameGame(),
     (game) async {
-      var dominoBoard = DominoBoard(SquadDominoGenerator());
+      var dominoBoard = DominoBoard(TetrominoOGenerator());
       await game.ensureAdd(dominoBoard);
       await dominoBoard.ensureAdd(Domino(position: Vector2(0, 0)));
       await dominoBoard.ensureAdd(Domino(position: Vector2(0, 20)));

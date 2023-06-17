@@ -17,7 +17,7 @@ class TetrisGame extends FlameGame with HasKeyboardHandlerComponents {
   int get score => _dominoBoard?.dominoCount ?? 0;
 
   TetrisGame({DominoGenerator? dominoGenerator}) {
-    _dominoGenerator = dominoGenerator ?? SquadDominoGenerator();
+    _dominoGenerator = dominoGenerator ?? RandomTetrominoGenerator();
   }
 
   @override
