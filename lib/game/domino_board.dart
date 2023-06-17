@@ -9,7 +9,6 @@ class DominoBoard extends Component with HasGameRef<TetrisGame> {
   @override
   Future onLoad() async {
     super.onLoad();
-    add(Domino());
   }
 
   int _eliminateCount = 0;
