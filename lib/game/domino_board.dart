@@ -23,13 +23,22 @@ class DominoBoard extends Component
   @override
   bool onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
     var movingDominoes = _getMovingDominoes();
+    var stoppedDominoes =
+        children.whereType<Domino>().where((domino) => domino.isStop);
     if (event.isKeyPressed(LogicalKeyboardKey.arrowRight) &&
-        movingDominoes.every((domino) => domino.position.x < 180)) {
+        movingDominoes.every((domino) => domino.position.x < 180) &&
+        movingDominoes.every((domino) => !stoppedDominoes.any((stoppedDomino) =>
+            stoppedDomino.position.x == domino.position.x + 20 &&
+            stoppedDomino.floor == domino.floor))) {
       for (var domino in movingDominoes) {
         domino.position.x += 20;
       }
     } else if (event.isKeyPressed(LogicalKeyboardKey.arrowLeft) &&
-        movingDominoes.every((domino) => domino.position.x > 0)) {
+        movingDominoes.every((domino) => domino.position.x > 0) &&
+        movingDominoes.every((domino) => !stoppedDominoes.any(
+        (stoppedDomino) =>
+            stoppedDomino.position.x == domino.position.x - 20 &&
+            stoppedDomino.floor == domino.floor))) {
       for (var domino in movingDominoes) {
         domino.position.x -= 20;
       }
