@@ -43,7 +43,6 @@ class Domino extends RectangleComponent with HasGameRef<TetrisGame>, KeyboardHan
     }
   }
 
-
   void stop() {
     _isStop = true;
   }

@@ -25,7 +25,7 @@ main() {
     "Second domino should reach the bottom when it moves to another column",
     setUp: (game, tester) async => game,
     verify: (game, tester) async {
-      game.update(19);
+      game.update(18);
       game.update(1);
       game.update(10);
 
@@ -34,7 +34,7 @@ main() {
       game.update(8);
       game.update(1);
 
-      expect(domino(game).elementAt(1).position.y, 380);
+      expect(stopDomino(game)[4].position.y, 360);
     },
   );
 
@@ -66,19 +66,19 @@ main() {
     "Eliminate domino when domino stop in one row",
     setUp: (game, tester) async => game,
     verify: (game, tester) async {
-      game.update(19);
+      game.update(18);
       game.update(0);
 
-      for (var i = 1; i < 10; i++) {
+      for (var i = 1; i < 5; i++) {
         game.update(10);
         await pressKey(tester, game, LogicalKeyboardKey.arrowRight, i);
-        game.update(9);
+        game.update(8);
         game.update(0);
       }
 
       game.update(0);
-      expect(domino(game).length, 1);
-      expect(game.score, 11);
+      expect(domino(game).length, 4);
+      expect(game.score, 24);
     },
   );
 }
@@ -100,3 +100,8 @@ Future<void> pressKey(
 
 Iterable<Domino> domino(TetrisGame game) =>
     game.dominoBoard.children.whereType<Domino>();
+
+List<Domino> stopDomino(TetrisGame game) => game.dominoBoard.children
+    .whereType<Domino>()
+    .where((domino) => domino.isStop)
+    .toList();

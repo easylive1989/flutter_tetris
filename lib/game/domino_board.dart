@@ -36,10 +36,17 @@ class DominoBoard extends Component with HasGameRef<TetrisGame> {
             _eliminate(dominoes);
           }
         }
-        add(Domino());
+        addDomino();
         break;
       }
     }
+  }
+
+  void addDomino() {
+    add(Domino(position: Vector2(0, 0)));
+    add(Domino(position: Vector2(0, 20)));
+    add(Domino(position: Vector2(20, 0)));
+    add(Domino(position: Vector2(20, 20)));
   }
 
   void _eliminate(Iterable<Domino> dominoes) {

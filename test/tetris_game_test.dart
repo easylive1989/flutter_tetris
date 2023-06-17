@@ -11,8 +11,8 @@ main() {
     (game) async {
       game.update(10);
 
-      expect(domino(game).last.position.y, 200);
-      expect(game.score, 1);
+      expect(movingDominoes(game).first.position.y, 200);
+      expect(game.score, 4);
     },
   );
 
@@ -20,12 +20,11 @@ main() {
     "Domino stop when it reaches the bottom",
     () => createTetrisGame(),
     (game) async {
-      game.update(19);
+      game.update(18);
       game.update(1);
       game.update(1);
 
-      expect(domino(game).first.position.y, 380);
-      expect(game.score, 2);
+      expect(stopDominoes(game).first.position.y, 360);
     },
   );
 
@@ -33,11 +32,11 @@ main() {
     "Show another falling domino when pre domino stop",
     () => createTetrisGame(),
     (game) async {
-      game.update(19);
+      game.update(18);
       game.update(1);
       game.update(1);
 
-      expect(domino(game).length, 2);
+      expect(dominoes(game).length, 8);
     },
   );
 
@@ -45,13 +44,12 @@ main() {
     "Domino stop when it reaches another domino",
     () => createTetrisGame(),
     (game) async {
-      game.update(19);
-      game.update(1);
       game.update(18);
       game.update(1);
+      game.update(16);
+      game.update(1);
 
-
-      expect(domino(game).elementAt(1).position.y, 360);
+      expect(stopDominoes(game)[4].position.y, 320);
     },
   );
 
@@ -74,7 +72,7 @@ main() {
       await game.restart();
       game.update(0);
 
-      expect(domino(game).length, 1);
+      expect(movingDominoes(game).length, 4);
       expect(game.dominoBoard.isDominoReachTop, false);
     },
   );
@@ -95,4 +93,13 @@ TetrisGame createTetrisGame() {
   return tetrisGame;
 }
 
-Iterable<Domino> domino(TetrisGame game) => game.dominoBoard.children.whereType<Domino>();
+Iterable<Domino> movingDominoes(TetrisGame game) => game.dominoBoard.children
+    .whereType<Domino>()
+    .where((element) => !element.isStop);
+
+List<Domino> stopDominoes(TetrisGame game) => game.dominoBoard.children
+    .whereType<Domino>()
+    .where((element) => element.isStop).toList();
+
+Iterable<Domino> dominoes(TetrisGame game) => game.dominoBoard.children
+    .whereType<Domino>();

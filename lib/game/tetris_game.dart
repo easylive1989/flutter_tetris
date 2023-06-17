@@ -2,7 +2,6 @@ import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_tetris/game/domino.dart';
 import 'package:flutter_tetris/game/domino_board.dart';
 import 'package:flutter_tetris/game/domino_board_border.dart';
 import 'package:flutter_tetris/game/score.dart';
@@ -22,14 +21,14 @@ class TetrisGame extends FlameGame with HasKeyboardHandlerComponents {
     add(DominoBoardBorder());
     add(_dominoBoard = DominoBoard());
     add(Score(margin: const EdgeInsets.only(top: 5, left: 210)));
-    _dominoBoard?.add(Domino());
+    _dominoBoard?.addDomino();
   }
 
   Future restart() async {
     overlays.remove(overlays.activeOverlays.first);
     removeAll(children.whereType<DominoBoard>());
     add(_dominoBoard = DominoBoard());
-    _dominoBoard?.add(Domino());
+    _dominoBoard?.addDomino();
     resumeEngine();
   }
 
