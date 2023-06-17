@@ -71,6 +71,6 @@ class DominoBoard extends Component with HasGameRef<TetrisGame> {
   bool _isReachStopDomino(Domino lastDomino) =>
       children.whereType<Domino>().any((domino) =>
           domino.isStop &&
-          domino.celling == lastDomino.floor + 1 &&
+          domino.floor == lastDomino.floor + 1 &&
           domino.column == lastDomino.column);
 }
