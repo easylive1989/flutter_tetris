@@ -24,12 +24,11 @@ class DominoBoard extends Component with HasGameRef<TetrisGame> {
   @override
   void update(double dt) {
     super.update(dt);
-    var lastDomino =
-        children.whereType<Domino>().where((domino) => !domino.isStop);
+    var movingDominoes = _getMovingDominoes();
 
-    for (var domino in lastDomino) {
-      if (domino.floor == _lastRow || _isReachOtherDomino(domino)) {
-        for (var domino in lastDomino) {
+    for (var movingDomino in movingDominoes) {
+      if (movingDomino.floor == _lastRow || _isReachStopDomino(movingDomino)) {
+        for (var domino in movingDominoes) {
           domino.stop();
           var dominoes = _sameRowDominoes(domino);
           if (dominoes.length == _column) {
@@ -41,6 +40,9 @@ class DominoBoard extends Component with HasGameRef<TetrisGame> {
       }
     }
   }
+
+  Iterable<Domino> _getMovingDominoes() =>
+      children.whereType<Domino>().where((domino) => !domino.isStop);
 
   void addDomino() {
     add(Domino(position: Vector2(0, 0)));
@@ -58,7 +60,7 @@ class DominoBoard extends Component with HasGameRef<TetrisGame> {
       .whereType<Domino>()
       .where((domino) => domino.floor == lastDomino.floor && domino.isStop);
 
-  bool _isReachOtherDomino(Domino lastDomino) =>
+  bool _isReachStopDomino(Domino lastDomino) =>
       children.whereType<Domino>().any((domino) =>
           domino.isStop &&
           domino.celling == lastDomino.floor + 1 &&
