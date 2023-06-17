@@ -21,17 +21,19 @@ class DominoBoard extends Component with HasGameRef<TetrisGame> {
     super.update(dt);
     var lastDomino = children.last as Domino;
 
-    if (lastDomino.floor == 19 || isReachOtherDomino(lastDomino)) {
+    if (lastDomino.floor == 19 || _isReachOtherDomino(lastDomino)) {
       lastDomino.stop();
-      var sameRowDomino = children.whereType<Domino>().where((domino) => domino.floor == lastDomino.floor && domino.isStop);
-      if (sameRowDomino.length == 10) {
-        removeAll(sameRowDomino);
+      var dominoes = _sameRowDominoes(lastDomino);
+      if (dominoes.length == 10) {
+        removeAll(dominoes);
         _eliminateCount++;
       }
       add(Domino());
     }
   }
 
-  bool isReachOtherDomino(Domino lastDomino) => children.whereType<Domino>().any((domino) => domino.floor == lastDomino.floor + 1 && domino.column == lastDomino.column );
+  Iterable<Domino> _sameRowDominoes(Domino lastDomino) => children.whereType<Domino>().where((domino) => domino.floor == lastDomino.floor && domino.isStop);
+
+  bool _isReachOtherDomino(Domino lastDomino) => children.whereType<Domino>().any((domino) => domino.floor == lastDomino.floor + 1 && domino.column == lastDomino.column );
 
 }
