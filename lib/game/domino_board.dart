@@ -1,9 +1,11 @@
 import 'package:flame/components.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_tetris/game/domino.dart';
 import 'package:flutter_tetris/game/domino_generator.dart';
 import 'package:flutter_tetris/game/tetris_game.dart';
 
-class DominoBoard extends Component with HasGameRef<TetrisGame> {
+class DominoBoard extends Component
+    with HasGameRef<TetrisGame>, KeyboardHandler {
   static const int _column = 10;
   static const int _row = 20;
 
@@ -16,6 +18,24 @@ class DominoBoard extends Component with HasGameRef<TetrisGame> {
   Future onLoad() async {
     super.onLoad();
     _dominoGenerator.generate(this);
+  }
+
+  @override
+  bool onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
+    var movingDominoes = _getMovingDominoes();
+    if (event.isKeyPressed(LogicalKeyboardKey.arrowRight) &&
+        movingDominoes.every((domino) => domino.position.x < 180)) {
+      for (var domino in movingDominoes) {
+        domino.position.x += 20;
+      }
+    } else if (event.isKeyPressed(LogicalKeyboardKey.arrowLeft) &&
+        movingDominoes.every((domino) => domino.position.x > 0)) {
+      for (var domino in movingDominoes) {
+        domino.position.x -= 20;
+      }
+    }
+
+    return super.onKeyEvent(event, keysPressed);
   }
 
   int _eliminateCount = 0;
@@ -49,8 +69,10 @@ class DominoBoard extends Component with HasGameRef<TetrisGame> {
     }
   }
 
-  void _adjustDominoPosition( int eliminateRow) {
-    var dominoesAboveEliminateRow = children.whereType<Domino>().where((domino) => domino.floor < eliminateRow);
+  void _adjustDominoPosition(int eliminateRow) {
+    var dominoesAboveEliminateRow = children
+        .whereType<Domino>()
+        .where((domino) => domino.floor < eliminateRow);
     for (var domino in dominoesAboveEliminateRow) {
       domino.position.y += 20;
     }

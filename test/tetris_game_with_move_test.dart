@@ -12,6 +12,23 @@ main() {
   });
 
   flameTester.testGameWidget(
+    "Move domino to left at beginning",
+    setUp: (game, tester) async => game,
+    verify: (game, tester) async {
+      game.update(0);
+
+      await pressKey(tester, game, LogicalKeyboardKey.arrowLeft, 1);
+
+      game.update(1);
+
+      expect(domino(game)[0].position, Vector2(0, 20));
+      expect(domino(game)[1].position, Vector2(0, 40));
+      expect(domino(game)[2].position, Vector2(20, 20));
+      expect(domino(game)[3].position, Vector2(20, 40));
+    },
+  );
+
+  flameTester.testGameWidget(
     "Move domino to right",
     setUp: (game, tester) async => game,
     verify: (game, tester) async {
@@ -62,7 +79,7 @@ main() {
 
       await pressKey(tester, game, LogicalKeyboardKey.arrowRight, 12);
 
-      expect(domino(game).first.position.x, 180);
+      expect(domino(game).first.position.x, 160);
     },
   );
 
@@ -105,8 +122,8 @@ Future<void> pressKey(
   game.resumeEngine();
 }
 
-Iterable<Domino> domino(TetrisGame game) =>
-    game.dominoBoard.children.whereType<Domino>();
+List<Domino> domino(TetrisGame game) =>
+    game.dominoBoard.children.whereType<Domino>().toList();
 
 List<Domino> stopDomino(TetrisGame game) => game.dominoBoard.children
     .whereType<Domino>()
