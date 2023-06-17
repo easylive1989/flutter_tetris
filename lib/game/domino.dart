@@ -12,7 +12,7 @@ class Domino extends RectangleComponent with HasGameRef<TetrisGame>, KeyboardHan
 
   int get floor => _totalDelta.floor();
 
-  int get celling => _totalDelta.ceil();
+  int get celling => _totalDelta.floor();
 
   int get column => (position.x / _dominoSize).floor();
 
