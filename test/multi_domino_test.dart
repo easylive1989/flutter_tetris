@@ -3,13 +3,14 @@ import 'package:flame_test/flame_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_tetris/game/domino.dart';
 import 'package:flutter_tetris/game/domino_board.dart';
+import 'package:flutter_tetris/game/domino_generator.dart';
 
 main() {
   testWithGame(
     "2 x 1 domino should stop when reach the bottom",
     () => FlameGame(),
     (game) async {
-      var dominoBoard = DominoBoard();
+      var dominoBoard = DominoBoard(SquadDominoGenerator());
       await game.ensureAdd(dominoBoard);
       await dominoBoard.ensureAdd(Domino(position: Vector2(0, 0)));
       await dominoBoard.ensureAdd(Domino(position: Vector2(0, 20)));
@@ -28,7 +29,7 @@ main() {
     "squad domino should stop when reach the bottom",
     () => FlameGame(),
     (game) async {
-      var dominoBoard = DominoBoard();
+      var dominoBoard = DominoBoard(SquadDominoGenerator());
       await game.ensureAdd(dominoBoard);
       await dominoBoard.ensureAdd(Domino(position: Vector2(0, 0)));
       await dominoBoard.ensureAdd(Domino(position: Vector2(0, 20)));

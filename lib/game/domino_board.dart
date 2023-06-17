@@ -1,14 +1,21 @@
 import 'package:flame/components.dart';
 import 'package:flutter_tetris/game/domino.dart';
+import 'package:flutter_tetris/game/domino_generator.dart';
 import 'package:flutter_tetris/game/tetris_game.dart';
 
 class DominoBoard extends Component with HasGameRef<TetrisGame> {
   static const int _column = 10;
   static const int _row = 20;
 
+  final DominoGenerator _dominoGenerator;
+
+  DominoBoard(DominoGenerator dominoGenerator)
+      : _dominoGenerator = dominoGenerator;
+
   @override
   Future onLoad() async {
     super.onLoad();
+    _dominoGenerator.generate(this);
   }
 
   int _eliminateCount = 0;
@@ -35,7 +42,7 @@ class DominoBoard extends Component with HasGameRef<TetrisGame> {
             _eliminate(dominoes);
           }
         }
-        addDomino();
+        _dominoGenerator.generate(this);
         break;
       }
     }
@@ -43,13 +50,6 @@ class DominoBoard extends Component with HasGameRef<TetrisGame> {
 
   Iterable<Domino> _getMovingDominoes() =>
       children.whereType<Domino>().where((domino) => !domino.isStop);
-
-  void addDomino() {
-    add(Domino(position: Vector2(0, 0)));
-    add(Domino(position: Vector2(0, 20)));
-    add(Domino(position: Vector2(20, 0)));
-    add(Domino(position: Vector2(20, 20)));
-  }
 
   void _eliminate(Iterable<Domino> dominoes) {
     removeAll(dominoes);
