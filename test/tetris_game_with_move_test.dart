@@ -51,6 +51,28 @@ main() {
   );
 
   flameTester.testGameWidget(
+    "Can move the domino left when another domino is not left next to it",
+    setUp: (game, tester) async => game,
+    verify: (game, tester) async {
+      game.update(0);
+      game.update(18);
+      game.update(0);
+      game.update(10);
+
+      await pressKey(tester, game, LogicalKeyboardKey.arrowRight, 3);
+
+      game.update(7);
+
+      await pressKey(tester, game, LogicalKeyboardKey.arrowLeft, 1);
+
+      expect(domino(game)[4].position, Vector2(40, 340));
+      expect(domino(game)[5].position, Vector2(40, 360));
+      expect(domino(game)[6].position, Vector2(60, 340));
+      expect(domino(game)[7].position, Vector2(60, 360));
+    },
+  );
+
+  flameTester.testGameWidget(
     "Move domino to right",
     setUp: (game, tester) async => game,
     verify: (game, tester) async {
