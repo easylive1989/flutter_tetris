@@ -29,7 +29,7 @@ main() {
   );
 
   flameTester.testGameWidget(
-    "Move the domino next to another domino",
+    "Can not move the domino left when another domino is left next to it",
     setUp: (game, tester) async => game,
     verify: (game, tester) async {
       game.update(0);
@@ -37,16 +37,16 @@ main() {
       game.update(0);
       game.update(10);
 
-      await pressKey(tester, game, LogicalKeyboardKey.arrowRight, 1);
+      await pressKey(tester, game, LogicalKeyboardKey.arrowRight, 2);
 
       game.update(7);
 
-      await pressKey(tester, game, LogicalKeyboardKey.arrowLeft, 1);
+      await pressKey(tester, game, LogicalKeyboardKey.arrowLeft, 2);
 
-      expect(domino(game)[4].position, Vector2(20, 340));
-      expect(domino(game)[5].position, Vector2(20, 360));
-      expect(domino(game)[6].position, Vector2(40, 340));
-      expect(domino(game)[7].position, Vector2(40, 360));
+      expect(domino(game)[4].position, Vector2(40, 340));
+      expect(domino(game)[5].position, Vector2(40, 360));
+      expect(domino(game)[6].position, Vector2(60, 340));
+      expect(domino(game)[7].position, Vector2(60, 360));
     },
   );
 
