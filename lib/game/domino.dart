@@ -47,4 +47,17 @@ class Domino extends RectangleComponent with HasGameRef<TetrisGame> {
   void stop() {
     _isStop = true;
   }
+
+  void moveLeft() {
+    position.x -= _dominoSize;
+  }
+
+  void moveRight() {
+    position.x += _dominoSize;
+  }
+
+  void moveToNextFloor() {
+    position.y += _dominoSize;
+  }
+
 }

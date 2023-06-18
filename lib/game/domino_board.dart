@@ -24,19 +24,17 @@ class DominoBoard extends Component
   bool onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
     var movingDominoes = _getMovingDominoes();
     var stoppedDominoes = _getStoppedDominoes();
-    var bool = movingDominoes.every((domino) => !domino.isLeftOf(stoppedDominoes));
-    print(bool);
     if (event.isKeyPressed(LogicalKeyboardKey.arrowRight) &&
         movingDominoes.every((domino) => domino.isRightOfBoundary) &&
         movingDominoes.every((domino) => !domino.isRightOf(stoppedDominoes))) {
       for (var domino in movingDominoes) {
-        domino.position.x += 20;
+        domino.moveRight();
       }
     } else if (event.isKeyPressed(LogicalKeyboardKey.arrowLeft) &&
         movingDominoes.every((domino) => domino.isLeftOfBoundary) &&
-        bool ) {
+        movingDominoes.every((domino) => !domino.isLeftOf(stoppedDominoes)) ) {
       for (var domino in movingDominoes) {
-        domino.position.x -= 20;
+        domino.moveLeft();
       }
     }
 
@@ -82,7 +80,7 @@ class DominoBoard extends Component
         .whereType<Domino>()
         .where((domino) => domino.floor < eliminateRow);
     for (var domino in dominoesAboveEliminateRow) {
-      domino.position.y += 20;
+      domino.moveToNextFloor();
     }
   }
 
