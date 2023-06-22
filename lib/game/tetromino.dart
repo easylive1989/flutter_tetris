@@ -42,13 +42,17 @@ class Tetromino {
   }
 
   void rotate() {
-    if (dominoes
-            .every((domino) => domino.column == dominoes.elementAt(0).column) ||
-        dominoes
-            .every((domino) => domino.floor == dominoes.elementAt(0).floor)) {
+    if (_isITetromino()) {
       for (var domino in dominoes) {
         domino.position = Vector2(domino.position.y, domino.position.x);
       }
     }
+  }
+
+  bool _isITetromino() {
+    return dominoes
+          .every((domino) => domino.column == dominoes.elementAt(0).column) ||
+      dominoes
+          .every((domino) => domino.floor == dominoes.elementAt(0).floor);
   }
 }
