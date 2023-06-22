@@ -1,5 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flutter_tetris/game/domino.dart';
+import 'dart:math';
 
 class Tetromino {
   final Iterable<Domino> dominoes;
@@ -42,17 +43,26 @@ class Tetromino {
   }
 
   void rotate() {
-    if (_isITetromino()) {
+    if (dominoes
+        .every((domino) => domino.column == dominoes.elementAt(0).column)) {
+      var dp = dominoes.elementAt(0).position;
+      dominoes.elementAt(1).position = Vector2(dp.x + 20, dp.y );
+      dominoes.elementAt(2).position = Vector2(dp.x + 40, dp.y );
+      dominoes.elementAt(3).position = Vector2(dp.x + 60, dp.y );
+      return;
+    }
+    if (dominoes
+        .every((domino) => domino.floor == dominoes.elementAt(0).floor)) {
       for (var domino in dominoes) {
         domino.position = Vector2(domino.position.y, domino.position.x);
       }
     }
-  }
 
-  bool _isITetromino() {
-    return dominoes
-          .every((domino) => domino.column == dominoes.elementAt(0).column) ||
-      dominoes
-          .every((domino) => domino.floor == dominoes.elementAt(0).floor);
+    // var column = dominoes.map((domino) => domino.position.x - 180).reduce(max);
+    // if (column > 0) {
+    //   for (var domino in dominoes) {
+    //     domino.position.x -= column;
+    //   }
+    // }
   }
 }
