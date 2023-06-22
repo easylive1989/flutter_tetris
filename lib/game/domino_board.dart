@@ -94,8 +94,7 @@ class DominoBoard extends Component
       .where((domino) => domino.floor == lastDomino.floor && domino.isStop);
 
   bool _isReachStopDomino(Domino lastDomino) =>
-      children.whereType<Domino>().any((domino) =>
-          domino.isStop &&
+      _getStoppedDominoes().any((domino) =>
           domino.floor == lastDomino.floor + 1 &&
           domino.column == lastDomino.column);
 }
