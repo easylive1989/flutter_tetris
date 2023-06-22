@@ -17,30 +17,33 @@ main() {
     ]);
   });
 
-  test("rotate 4 x 1 tetromino should be 1 x 4 tetromino", () {
-    var tetromino = Tetromino(TetrominoIGenerator().getDominoes());
+  group("rotate I tetromino", (){
+    test("rotate 4 x 1 tetromino should be 1 x 4 tetromino", () {
+      var tetromino = Tetromino(TetrominoIGenerator().getDominoes());
 
-    tetromino.rotate();
+      tetromino.rotate();
 
-    expect(tetromino.dominoes.map((domino) => domino.position), [
-      Vector2(0, 0),
-      Vector2(20, 0),
-      Vector2(40, 0),
-      Vector2(60, 0),
-    ]);
+      expect(tetromino.dominoes.map((domino) => domino.position), [
+        Vector2(0, 0),
+        Vector2(20, 0),
+        Vector2(40, 0),
+        Vector2(60, 0),
+      ]);
+    });
+
+    test("rotate 1 x 4 tetromino should be 4 x 1 tetromino", () {
+      var tetromino = Tetromino(TetrominoIGenerator().getDominoes());
+
+      tetromino.rotate();
+      tetromino.rotate();
+
+      expect(tetromino.dominoes.map((domino) => domino.position), [
+        Vector2(0, 0),
+        Vector2(0, 20),
+        Vector2(0, 40),
+        Vector2(0, 60),
+      ]);
+    });
   });
 
-  test("rotate 1 x 4 tetromino should be 4 x 1 tetromino", () {
-    var tetromino = Tetromino(TetrominoIGenerator().getDominoes());
-
-    tetromino.rotate();
-    tetromino.rotate();
-
-    expect(tetromino.dominoes.map((domino) => domino.position), [
-      Vector2(0, 0),
-      Vector2(0, 20),
-      Vector2(0, 40),
-      Vector2(0, 60),
-    ]);
-  });
 }
