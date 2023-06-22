@@ -74,5 +74,12 @@ class Tetromino {
         domino.position.x -= column;
       }
     }
+
+    var row = dominoes.map((domino) => 0 - domino.position.x).reduce(max);
+    if (row > 0) {
+      for (var domino in dominoes) {
+        domino.position.x += row;
+      }
+    }
   }
 }

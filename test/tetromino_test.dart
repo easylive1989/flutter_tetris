@@ -94,6 +94,24 @@ main() {
       ]);
     });
 
+    test("rotate Z at left boundary", () {
+      var tetromino = Tetromino([
+        Domino(position: Vector2(0, 20)),
+        Domino(position: Vector2(20, 20)),
+        Domino(position: Vector2(20, 40)),
+        Domino(position: Vector2(40, 40)),
+      ]);
+
+      tetromino.rotate();
+
+      expect(tetromino.dominoes.map((domino) => domino.position), [
+        Vector2(20, 20),
+        Vector2(20, 40),
+        Vector2(0, 40),
+        Vector2(0, 60),
+      ]);
+    });
+
     test("rotate vertical Z", () {
       var tetromino = Tetromino([
         Domino(position: Vector2(40, 20)),
