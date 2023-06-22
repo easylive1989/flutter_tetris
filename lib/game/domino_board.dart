@@ -66,8 +66,8 @@ class DominoBoard extends Component
   }
 
   void _adjustDominoPosition(int eliminateRow) {
-    var dominoesAboveEliminateRow = _getStoppedDominoes()
-        .where((domino) => domino.floor < eliminateRow);
+    var dominoesAboveEliminateRow =
+        _getStoppedDominoes().where((domino) => domino.floor < eliminateRow);
     for (var domino in dominoesAboveEliminateRow) {
       domino.moveToNextFloor();
     }
