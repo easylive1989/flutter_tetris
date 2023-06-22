@@ -48,13 +48,13 @@ class DominoBoard extends Component
   @override
   void update(double dt) {
     super.update(dt);
-    var movingTetromino = _getMovingTetromino();
+    var tetromino = _getMovingTetromino();
     var stoppedDominoes = _getStoppedDominoes();
 
-    if (movingTetromino.isLastFloor ||
-        movingTetromino.isTopOf(stoppedDominoes)) {
-      movingTetromino.stop();
-      for (var domino in movingTetromino.dominoes) {
+    if (tetromino.isLastFloor ||
+        tetromino.isTopOf(stoppedDominoes)) {
+      tetromino.stop();
+      for (var domino in tetromino.dominoes) {
         var dominoes = _sameRowDominoes(domino);
         if (dominoes.length == _column) {
           _eliminate(dominoes);
