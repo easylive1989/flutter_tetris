@@ -46,6 +46,8 @@ class Tetromino {
   void rotate() {
     var floorGroup = groupBy(dominoes, (domino) => domino.floor);
     var columnGroup = groupBy(dominoes, (domino) => domino.column);
+    bool isZ =
+        dominoes.elementAt(0).position.x < dominoes.elementAt(3).position.x;
     if (columnGroup.length == 1) {
       var dp = dominoes.elementAt(0).position;
       dominoes.elementAt(1).position = Vector2(dp.x + 20, dp.y);
@@ -56,7 +58,7 @@ class Tetromino {
       dominoes.elementAt(1).position = Vector2(dp.x, dp.y + 20);
       dominoes.elementAt(2).position = Vector2(dp.x, dp.y + 40);
       dominoes.elementAt(3).position = Vector2(dp.x, dp.y + 60);
-    } else if (floorGroup.length == 2 && columnGroup.length == 3) {
+    } else if (floorGroup.length == 2 && columnGroup.length == 3 && isZ) {
       var dp = dominoes.elementAt(0).position;
       dominoes.elementAt(1).position = Vector2(dp.x, dp.y + 20);
       dominoes.elementAt(2).position = Vector2(dp.x - 20, dp.y + 20);
@@ -66,6 +68,11 @@ class Tetromino {
       dominoes.elementAt(1).position = Vector2(dp.x + 20, dp.y);
       dominoes.elementAt(2).position = Vector2(dp.x + 20, dp.y + 20);
       dominoes.elementAt(3).position = Vector2(dp.x + 40, dp.y + 20);
+    } else if (floorGroup.length == 2 && columnGroup.length == 3 && !isZ) {
+      var dp = dominoes.elementAt(0).position;
+      dominoes.elementAt(1).position = Vector2(dp.x, dp.y + 20);
+      dominoes.elementAt(2).position = Vector2(dp.x + 20, dp.y + 20);
+      dominoes.elementAt(3).position = Vector2(dp.x + 20, dp.y + 40);
     }
 
     var column = dominoes.map((domino) => domino.position.x - 180).reduce(max);
