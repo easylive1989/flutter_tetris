@@ -92,7 +92,7 @@ main() {
         Vector2(20, 40),
         Vector2(20, 60),
       ]);
-    }, skip: true);
+    });
   });
 
 }
