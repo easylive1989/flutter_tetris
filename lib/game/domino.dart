@@ -28,6 +28,13 @@ class Domino extends RectangleComponent with HasGameRef<TetrisGame> {
     return domino.position.x == position.x - _dominoSize && floor == domino.floor;
   }
 
+  bool isTopOf(Iterable<Domino> dominoes) =>
+      dominoes.any((domino) => _isTopOf(domino));
+
+  bool _isTopOf(domino) {
+    return domino.position.x == position.x && floor == domino.floor - 1;
+  }
+
   bool get isRightOfBoundary => position.x < 180;
 
   bool get isLeftOfBoundary => position.x > 0;
@@ -59,5 +66,6 @@ class Domino extends RectangleComponent with HasGameRef<TetrisGame> {
   void moveToNextFloor() {
     position.y += _dominoSize;
   }
+
 
 }

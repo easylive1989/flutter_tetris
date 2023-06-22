@@ -56,20 +56,23 @@ class DominoBoard extends Component
     super.update(dt);
     var movingDominoes = _getMovingTetromino();
 
-    for (var movingDomino in movingDominoes.dominoes) {
-      if (movingDomino.floor == _lastRow || _isReachStopDomino(movingDomino)) {
-        for (var domino in movingDominoes.dominoes) {
-          domino.stop();
-          var dominoes = _sameRowDominoes(domino);
-          if (dominoes.length == _column) {
-            _eliminate(dominoes);
-            _adjustDominoPosition(domino.floor);
-          }
+    bool isLastFloor = movingDominoes.dominoes
+        .any((domino) => domino.floor == _lastRow);
+    bool isTopOfStoppedDominoes = movingDominoes.dominoes
+        .any((domino) => domino.isTopOf(_getStoppedDominoes()));
+
+    if (isLastFloor || isTopOfStoppedDominoes) {
+      for (var domino in movingDominoes.dominoes) {
+        domino.stop();
+        var dominoes = _sameRowDominoes(domino);
+        if (dominoes.length == _column) {
+          _eliminate(dominoes);
+          _adjustDominoPosition(domino.floor);
         }
-        _dominoGenerator.generate(this);
-        break;
       }
+      _dominoGenerator.generate(this);
     }
+
   }
 
   void _adjustDominoPosition(int eliminateRow) {
@@ -92,9 +95,4 @@ class DominoBoard extends Component
   Iterable<Domino> _sameRowDominoes(Domino lastDomino) => children
       .whereType<Domino>()
       .where((domino) => domino.floor == lastDomino.floor && domino.isStop);
-
-  bool _isReachStopDomino(Domino lastDomino) =>
-      _getStoppedDominoes().any((domino) =>
-          domino.floor == lastDomino.floor + 1 &&
-          domino.column == lastDomino.column);
 }
