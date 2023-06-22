@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flame/components.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_tetris/game/domino.dart';
 
 abstract class DominoGenerator {
@@ -27,18 +28,24 @@ class RandomTetrominoGenerator extends DominoGenerator {
       4: zGenerator,
       5: jGenerator,
       6: lGenerator,
-    }[randomInt]!.generate(board);
+    }[randomInt]!
+        .generate(board);
   }
 }
 
 class TetrominoOGenerator extends DominoGenerator {
   @override
   void generate(Component board) {
-    board.add(Domino(position: Vector2(0, 0)));
-    board.add(Domino(position: Vector2(0, 20)));
-    board.add(Domino(position: Vector2(20, 0)));
-    board.add(Domino(position: Vector2(20, 20)));
+    board.addAll(getODominoes());
   }
+
+  @visibleForTesting
+  List<Domino> getODominoes() => [
+      Domino(position: Vector2(0, 0)),
+      Domino(position: Vector2(0, 20)),
+      Domino(position: Vector2(20, 0)),
+      Domino(position: Vector2(20, 20)),
+    ];
 }
 
 class TetrominoIGenerator extends DominoGenerator {
