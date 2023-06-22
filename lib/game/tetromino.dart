@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flame/components.dart';
 import 'package:flutter_tetris/game/domino.dart';
 import 'dart:math';
@@ -43,14 +44,14 @@ class Tetromino {
   }
 
   void rotate() {
-    if (dominoes
-        .every((domino) => domino.column == dominoes.elementAt(0).column)) {
+    var floorGroup = groupBy(dominoes, (domino) => domino.floor);
+    var columnGroup = groupBy(dominoes, (domino) => domino.column);
+    if (columnGroup.length == 1) {
       var dp = dominoes.elementAt(0).position;
       dominoes.elementAt(1).position = Vector2(dp.x + 20, dp.y);
       dominoes.elementAt(2).position = Vector2(dp.x + 40, dp.y);
       dominoes.elementAt(3).position = Vector2(dp.x + 60, dp.y);
-    } else if (dominoes
-        .every((domino) => domino.floor == dominoes.elementAt(0).floor)) {
+    } else if (floorGroup.length == 1) {
       var dp = dominoes.elementAt(0).position;
       dominoes.elementAt(1).position = Vector2(dp.x, dp.y + 20);
       dominoes.elementAt(2).position = Vector2(dp.x, dp.y + 40);
