@@ -2,6 +2,7 @@ import 'package:flame/components.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_tetris/game/domino.dart';
 import 'package:flutter_tetris/game/domino_generator.dart';
+import 'package:flutter_tetris/game/stopped_dominoes.dart';
 import 'package:flutter_tetris/game/tetris_game.dart';
 import 'package:flutter_tetris/game/tetromino.dart';
 
@@ -26,11 +27,11 @@ class DominoBoard extends Component
     var stoppedDominoes = _getStoppedDominoes();
     if (event.isKeyPressed(LogicalKeyboardKey.arrowRight) &&
         movingTetromino.isRightOfBoundary &&
-        !movingTetromino.isRightOf(stoppedDominoes)) {
+        !movingTetromino.isRightOf(stoppedDominoes.dominoes)) {
       movingTetromino.moveRight();
     } else if (event.isKeyPressed(LogicalKeyboardKey.arrowLeft) &&
         movingTetromino.isLeftOfBoundary &&
-        !movingTetromino.isLeftOf(stoppedDominoes)) {
+        !movingTetromino.isLeftOf(stoppedDominoes.dominoes)) {
       movingTetromino.moveLeft();
     }
 
@@ -41,8 +42,7 @@ class DominoBoard extends Component
 
   int get dominoCount => children.length + _eliminateCount * _column;
 
-  bool get isDominoReachTop =>
-      _getStoppedDominoes().any((domino) => domino.floor == 0);
+  bool get isDominoReachTop => _getStoppedDominoes().getByFloor(0).isNotEmpty;
 
   @override
   void update(double dt) {
@@ -50,12 +50,12 @@ class DominoBoard extends Component
     var tetromino = _getMovingTetromino();
     var stoppedDominoes = _getStoppedDominoes();
 
-    if (tetromino.isLastFloor || tetromino.isTopOf(stoppedDominoes)) {
+    if (tetromino.isLastFloor || tetromino.isTopOf(stoppedDominoes.dominoes)) {
       tetromino.stop();
       for (var domino in tetromino.dominoes) {
-        var dominoes = _sameRowDominoes(domino);
-        if (dominoes.length == _column) {
-          _eliminate(dominoes);
+        var latestStoppedDominoes = _getStoppedDominoes().getByFloor(domino.floor);
+        if (latestStoppedDominoes.length == _column) {
+          _eliminate(latestStoppedDominoes);
           _adjustDominoPosition(domino.floor);
         }
       }
@@ -65,7 +65,7 @@ class DominoBoard extends Component
 
   void _adjustDominoPosition(int eliminateRow) {
     var dominoesAboveEliminateRow =
-        _getStoppedDominoes().where((domino) => domino.floor < eliminateRow);
+        _getStoppedDominoes().getByTopOfFloor(eliminateRow);
     for (var domino in dominoesAboveEliminateRow) {
       domino.moveToNextFloor();
     }
@@ -79,10 +79,6 @@ class DominoBoard extends Component
   Tetromino _getMovingTetromino() => Tetromino(
       children.whereType<Domino>().where((domino) => !domino.isStop).toList());
 
-  Iterable<Domino> _getStoppedDominoes() =>
-      children.whereType<Domino>().where((domino) => domino.isStop).toList();
-
-  Iterable<Domino> _sameRowDominoes(Domino lastDomino) => children
-      .whereType<Domino>()
-      .where((domino) => domino.floor == lastDomino.floor && domino.isStop);
+  StoppedDominoes _getStoppedDominoes() => StoppedDominoes(
+      children.whereType<Domino>().where((domino) => domino.isStop).toList());
 }
