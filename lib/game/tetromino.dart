@@ -39,4 +39,6 @@ class Tetromino {
       domino.moveLeft();
     }
   }
+
+  void rotate() {}
 }
