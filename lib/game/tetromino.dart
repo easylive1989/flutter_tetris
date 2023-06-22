@@ -1,10 +1,13 @@
 import 'package:collection/collection.dart';
 import 'package:flame/components.dart';
+import 'package:flame/src/game/notifying_vector2.dart';
 import 'package:flutter_tetris/game/domino.dart';
 import 'dart:math';
 
+import 'package:flutter_tetris/game/tetromino_offsets.dart';
+
 class Tetromino {
-  final Iterable<Domino> dominoes;
+  final List<Domino> dominoes;
 
   Tetromino(this.dominoes);
 
@@ -48,16 +51,11 @@ class Tetromino {
     var columnGroup = groupBy(dominoes, (domino) => domino.column);
     bool isZ =
         dominoes.elementAt(0).position.x < dominoes.elementAt(3).position.x;
-    if (columnGroup.length == 1) {
-      var dp = dominoes.elementAt(0).position;
-      dominoes.elementAt(1).position = Vector2(dp.x + 20, dp.y);
-      dominoes.elementAt(2).position = Vector2(dp.x + 40, dp.y);
-      dominoes.elementAt(3).position = Vector2(dp.x + 60, dp.y);
-    } else if (floorGroup.length == 1) {
-      var dp = dominoes.elementAt(0).position;
-      dominoes.elementAt(1).position = Vector2(dp.x, dp.y + 20);
-      dominoes.elementAt(2).position = Vector2(dp.x, dp.y + 40);
-      dominoes.elementAt(3).position = Vector2(dp.x, dp.y + 60);
+    var type = getType(dominoes);
+    if (type == TetrominoType.i4x1) {
+      updateOffset(TetrominoType.i1x4, dominoes);
+    } else if (type == TetrominoType.i1x4) {
+      updateOffset(TetrominoType.i4x1, dominoes);
     } else if (floorGroup.length == 2 && columnGroup.length == 3 && isZ) {
       var dp = dominoes.elementAt(0).position;
       dominoes.elementAt(1).position = Vector2(dp.x, dp.y + 20);
