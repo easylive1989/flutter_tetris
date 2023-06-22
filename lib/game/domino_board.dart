@@ -37,9 +37,6 @@ class DominoBoard extends Component
     return super.onKeyEvent(event, keysPressed);
   }
 
-  Iterable<Domino> _getStoppedDominoes() =>
-      children.whereType<Domino>().where((domino) => domino.isStop).toList();
-
   int _eliminateCount = 0;
 
   int get dominoCount => children.length + _eliminateCount * _column;
@@ -77,13 +74,16 @@ class DominoBoard extends Component
     }
   }
 
-  Tetromino _getMovingTetromino() => Tetromino(
-      children.whereType<Domino>().where((domino) => !domino.isStop).toList());
-
   void _eliminate(Iterable<Domino> dominoes) {
     removeAll(dominoes);
     _eliminateCount++;
   }
+
+  Tetromino _getMovingTetromino() => Tetromino(
+      children.whereType<Domino>().where((domino) => !domino.isStop).toList());
+
+  Iterable<Domino> _getStoppedDominoes() =>
+      children.whereType<Domino>().where((domino) => domino.isStop).toList();
 
   Iterable<Domino> _sameRowDominoes(Domino lastDomino) => children
       .whereType<Domino>()
