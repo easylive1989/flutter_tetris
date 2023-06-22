@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_tetris/game/domino.dart';
 import 'package:flutter_tetris/game/domino_generator.dart';
 import 'package:flutter_tetris/game/tetris_game.dart';
+import 'package:flutter_tetris/game/tetromino.dart';
 
 class DominoBoard extends Component
     with HasGameRef<TetrisGame>, KeyboardHandler {
@@ -22,20 +23,16 @@ class DominoBoard extends Component
 
   @override
   bool onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
-    var movingDominoes = _getMovingDominoes();
+    var movingTetromino = _getMovingTetromino();
     var stoppedDominoes = _getStoppedDominoes();
     if (event.isKeyPressed(LogicalKeyboardKey.arrowRight) &&
-        movingDominoes.every((domino) => domino.isRightOfBoundary) &&
-        movingDominoes.every((domino) => !domino.isRightOf(stoppedDominoes))) {
-      for (var domino in movingDominoes) {
-        domino.moveRight();
-      }
+        movingTetromino.isRightOfBoundary &&
+        !movingTetromino.isRightOf(stoppedDominoes)) {
+      movingTetromino.moveRight();
     } else if (event.isKeyPressed(LogicalKeyboardKey.arrowLeft) &&
-        movingDominoes.every((domino) => domino.isLeftOfBoundary) &&
-        movingDominoes.every((domino) => !domino.isLeftOf(stoppedDominoes)) ) {
-      for (var domino in movingDominoes) {
-        domino.moveLeft();
-      }
+        movingTetromino.isLeftOfBoundary &&
+        !movingTetromino.isLeftOf(stoppedDominoes)) {
+      movingTetromino.moveLeft();
     }
 
     return super.onKeyEvent(event, keysPressed);
@@ -57,11 +54,11 @@ class DominoBoard extends Component
   @override
   void update(double dt) {
     super.update(dt);
-    var movingDominoes = _getMovingDominoes();
+    var movingDominoes = _getMovingTetromino();
 
-    for (var movingDomino in movingDominoes) {
+    for (var movingDomino in movingDominoes.dominoes) {
       if (movingDomino.floor == _lastRow || _isReachStopDomino(movingDomino)) {
-        for (var domino in movingDominoes) {
+        for (var domino in movingDominoes.dominoes) {
           domino.stop();
           var dominoes = _sameRowDominoes(domino);
           if (dominoes.length == _column) {
@@ -84,8 +81,8 @@ class DominoBoard extends Component
     }
   }
 
-  Iterable<Domino> _getMovingDominoes() =>
-      children.whereType<Domino>().where((domino) => !domino.isStop);
+  Tetromino _getMovingTetromino() =>
+      Tetromino(children.whereType<Domino>().where((domino) => !domino.isStop));
 
   void _eliminate(Iterable<Domino> dominoes) {
     removeAll(dominoes);
