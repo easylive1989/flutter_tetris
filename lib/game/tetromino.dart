@@ -42,7 +42,10 @@ class Tetromino {
   }
 
   void rotate() {
-    if (dominoes.every((domino) => domino.column == dominoes.elementAt(0).column)){
+    if (dominoes
+            .every((domino) => domino.column == dominoes.elementAt(0).column) ||
+        dominoes
+            .every((domino) => domino.floor == dominoes.elementAt(0).floor)) {
       for (var domino in dominoes) {
         domino.position = Vector2(domino.position.y, domino.position.x);
       }

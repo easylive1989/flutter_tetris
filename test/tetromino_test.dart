@@ -29,4 +29,18 @@ main() {
       Vector2(60, 0),
     ]);
   });
+
+  test("rotate 1 x 4 tetromino should be 4 x 1 tetromino", () {
+    var tetromino = Tetromino(TetrominoIGenerator().getDominoes());
+
+    tetromino.rotate();
+    tetromino.rotate();
+
+    expect(tetromino.dominoes.map((domino) => domino.position), [
+      Vector2(0, 0),
+      Vector2(0, 20),
+      Vector2(0, 40),
+      Vector2(0, 60),
+    ]);
+  });
 }
