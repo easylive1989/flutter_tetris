@@ -59,8 +59,8 @@ class DominoBoard extends Component
 
     if (movingTetromino.isLastFloor ||
         movingTetromino.isTopOf(stoppedDominoes)) {
+      movingTetromino.stop();
       for (var domino in movingTetromino.dominoes) {
-        domino.stop();
         var dominoes = _sameRowDominoes(domino);
         if (dominoes.length == _column) {
           _eliminate(dominoes);
@@ -80,8 +80,8 @@ class DominoBoard extends Component
     }
   }
 
-  Tetromino _getMovingTetromino() =>
-      Tetromino(children.whereType<Domino>().where((domino) => !domino.isStop));
+  Tetromino _getMovingTetromino() => Tetromino(
+      children.whereType<Domino>().where((domino) => !domino.isStop).toList());
 
   void _eliminate(Iterable<Domino> dominoes) {
     removeAll(dominoes);
