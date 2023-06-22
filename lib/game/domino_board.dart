@@ -33,6 +33,8 @@ class DominoBoard extends Component
         movingTetromino.isLeftOfBoundary &&
         !movingTetromino.isLeftOf(stoppedDominoes.dominoes)) {
       movingTetromino.moveLeft();
+    } else if (event.isKeyPressed(LogicalKeyboardKey.arrowUp)) {
+      movingTetromino.rotate();
     }
 
     return super.onKeyEvent(event, keysPressed);
