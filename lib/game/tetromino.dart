@@ -63,7 +63,7 @@ class Tetromino {
       dominoes.elementAt(1).position = Vector2(dp.x, dp.y + 20);
       dominoes.elementAt(2).position = Vector2(dp.x - 20, dp.y + 20);
       dominoes.elementAt(3).position = Vector2(dp.x - 20, dp.y + 40);
-    } else if (floorGroup.length == 3 && columnGroup.length == 2) {
+    } else if (floorGroup.length == 3 && columnGroup.length == 2 && !isZ) {
       var dp = dominoes.elementAt(0).position;
       dominoes.elementAt(1).position = Vector2(dp.x + 20, dp.y);
       dominoes.elementAt(2).position = Vector2(dp.x + 20, dp.y + 20);
@@ -73,6 +73,11 @@ class Tetromino {
       dominoes.elementAt(1).position = Vector2(dp.x, dp.y + 20);
       dominoes.elementAt(2).position = Vector2(dp.x + 20, dp.y + 20);
       dominoes.elementAt(3).position = Vector2(dp.x + 20, dp.y + 40);
+    } else if (floorGroup.length == 3 && columnGroup.length == 2 && isZ) {
+      var dp = dominoes.elementAt(0).position;
+      dominoes.elementAt(1).position = Vector2(dp.x - 20, dp.y);
+      dominoes.elementAt(2).position = Vector2(dp.x - 20, dp.y + 20);
+      dominoes.elementAt(3).position = Vector2(dp.x - 40, dp.y + 20);
     }
 
     var column = dominoes.map((domino) => domino.position.x - 180).reduce(max);
