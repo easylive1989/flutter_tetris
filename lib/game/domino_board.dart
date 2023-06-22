@@ -54,15 +54,12 @@ class DominoBoard extends Component
   @override
   void update(double dt) {
     super.update(dt);
-    var movingDominoes = _getMovingTetromino();
+    var movingTetromino = _getMovingTetromino();
+    var stoppedDominoes = _getStoppedDominoes();
 
-    bool isLastFloor = movingDominoes.dominoes
-        .any((domino) => domino.floor == _lastRow);
-    bool isTopOfStoppedDominoes = movingDominoes.dominoes
-        .any((domino) => domino.isTopOf(_getStoppedDominoes()));
-
-    if (isLastFloor || isTopOfStoppedDominoes) {
-      for (var domino in movingDominoes.dominoes) {
+    if (movingTetromino.isLastFloor ||
+        movingTetromino.isTopOf(stoppedDominoes)) {
+      for (var domino in movingTetromino.dominoes) {
         domino.stop();
         var dominoes = _sameRowDominoes(domino);
         if (dominoes.length == _column) {
@@ -72,7 +69,6 @@ class DominoBoard extends Component
       }
       _dominoGenerator.generate(this);
     }
-
   }
 
   void _adjustDominoPosition(int eliminateRow) {

@@ -20,6 +20,9 @@ class Tetromino {
   bool isTopOf(Iterable<Domino> otherDominoes) =>
       dominoes.any((domino) => domino.isTopOf(otherDominoes));
 
+  bool get isLastFloor =>
+      dominoes.any((domino) => domino.isLastFloor);
+
   void moveRight() {
     for (var domino in dominoes) {
       domino.moveRight();

@@ -39,6 +39,8 @@ class Domino extends RectangleComponent with HasGameRef<TetrisGame> {
 
   bool get isLeftOfBoundary => position.x > 0;
 
+  bool get isLastFloor => floor == 19;
+
   @override
   void update(double dt) {
     super.update(dt);
