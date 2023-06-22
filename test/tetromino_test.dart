@@ -1,12 +1,16 @@
 import 'package:flame/components.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_tetris/game/domino.dart';
-import 'package:flutter_tetris/game/domino_generator.dart';
 import 'package:flutter_tetris/game/tetromino.dart';
 
 main() {
   test("rotate O tetromino should keep same style", () {
-    var tetromino = Tetromino(TetrominoOGenerator().getDominoes());
+    var tetromino = Tetromino([
+      Domino(position: Vector2(0, 0)),
+      Domino(position: Vector2(0, 20)),
+      Domino(position: Vector2(20, 0)),
+      Domino(position: Vector2(20, 20)),
+    ]);
 
     tetromino.rotate();
 
