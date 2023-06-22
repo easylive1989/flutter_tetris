@@ -5,9 +5,7 @@ import 'package:flutter_tetris/game/tetromino.dart';
 
 main() {
   test("rotate O tetromino should keep same style", () {
-    var tetrominoOGenerator = TetrominoOGenerator();
-
-    var tetromino = Tetromino(tetrominoOGenerator.getODominoes());
+    var tetromino = Tetromino(TetrominoOGenerator().getDominoes());
 
     tetromino.rotate();
 
@@ -16,6 +14,19 @@ main() {
       Vector2(0, 20),
       Vector2(20, 0),
       Vector2(20, 20),
+    ]);
+  });
+
+  test("rotate 4 x 1 tetromino should be 1 x 4 tetromino", () {
+    var tetromino = Tetromino(TetrominoIGenerator().getDominoes());
+
+    tetromino.rotate();
+
+    expect(tetromino.dominoes.map((domino) => domino.position), [
+      Vector2(0, 0),
+      Vector2(20, 0),
+      Vector2(40, 0),
+      Vector2(60, 0),
     ]);
   });
 }

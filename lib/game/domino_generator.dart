@@ -36,16 +36,16 @@ class RandomTetrominoGenerator extends DominoGenerator {
 class TetrominoOGenerator extends DominoGenerator {
   @override
   void generate(Component board) {
-    board.addAll(getODominoes());
+    board.addAll(getDominoes());
   }
 
   @visibleForTesting
-  List<Domino> getODominoes() => [
-      Domino(position: Vector2(0, 0)),
-      Domino(position: Vector2(0, 20)),
-      Domino(position: Vector2(20, 0)),
-      Domino(position: Vector2(20, 20)),
-    ];
+  List<Domino> getDominoes() => [
+        Domino(position: Vector2(0, 0)),
+        Domino(position: Vector2(0, 20)),
+        Domino(position: Vector2(20, 0)),
+        Domino(position: Vector2(20, 20)),
+      ];
 }
 
 class TetrominoIGenerator extends DominoGenerator {
@@ -57,11 +57,11 @@ class TetrominoIGenerator extends DominoGenerator {
   @visibleForTesting
   List<Domino> getDominoes() {
     return [
-    Domino(position: Vector2(0, 0)),
-    Domino(position: Vector2(0, 20)),
-    Domino(position: Vector2(0, 40)),
-    Domino(position: Vector2(0, 60)),
-  ];
+      Domino(position: Vector2(0, 0)),
+      Domino(position: Vector2(0, 20)),
+      Domino(position: Vector2(0, 40)),
+      Domino(position: Vector2(0, 60)),
+    ];
   }
 }
 

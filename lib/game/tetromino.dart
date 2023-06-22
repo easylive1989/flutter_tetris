@@ -1,3 +1,4 @@
+import 'package:flame/components.dart';
 import 'package:flutter_tetris/game/domino.dart';
 
 class Tetromino {
@@ -40,5 +41,11 @@ class Tetromino {
     }
   }
 
-  void rotate() {}
+  void rotate() {
+    if (dominoes.every((domino) => domino.column == dominoes.elementAt(0).column)){
+      for (var domino in dominoes) {
+        domino.position = Vector2(domino.position.y, domino.position.x);
+      }
+    }
+  }
 }
