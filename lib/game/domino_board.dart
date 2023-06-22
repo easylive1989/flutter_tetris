@@ -41,9 +41,8 @@ class DominoBoard extends Component
 
   int get dominoCount => children.length + _eliminateCount * _column;
 
-  bool get isDominoReachTop => children
-      .whereType<Domino>()
-      .any((domino) => domino.floor == 0 && domino.isStop);
+  bool get isDominoReachTop =>
+      _getStoppedDominoes().any((domino) => domino.floor == 0);
 
   @override
   void update(double dt) {
@@ -51,8 +50,7 @@ class DominoBoard extends Component
     var tetromino = _getMovingTetromino();
     var stoppedDominoes = _getStoppedDominoes();
 
-    if (tetromino.isLastFloor ||
-        tetromino.isTopOf(stoppedDominoes)) {
+    if (tetromino.isLastFloor || tetromino.isTopOf(stoppedDominoes)) {
       tetromino.stop();
       for (var domino in tetromino.dominoes) {
         var dominoes = _sameRowDominoes(domino);
