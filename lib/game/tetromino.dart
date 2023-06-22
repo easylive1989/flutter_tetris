@@ -49,9 +49,7 @@ class Tetromino {
       dominoes.elementAt(1).position = Vector2(dp.x + 20, dp.y);
       dominoes.elementAt(2).position = Vector2(dp.x + 40, dp.y);
       dominoes.elementAt(3).position = Vector2(dp.x + 60, dp.y);
-      return;
-    }
-    if (dominoes
+    } else if (dominoes
         .every((domino) => domino.floor == dominoes.elementAt(0).floor)) {
       var dp = dominoes.elementAt(0).position;
       dominoes.elementAt(1).position = Vector2(dp.x, dp.y + 20);
@@ -59,11 +57,11 @@ class Tetromino {
       dominoes.elementAt(3).position = Vector2(dp.x, dp.y + 60);
     }
 
-    // var column = dominoes.map((domino) => domino.position.x - 180).reduce(max);
-    // if (column > 0) {
-    //   for (var domino in dominoes) {
-    //     domino.position.x -= column;
-    //   }
-    // }
+    var column = dominoes.map((domino) => domino.position.x - 180).reduce(max);
+    if (column > 0) {
+      for (var domino in dominoes) {
+        domino.position.x -= column;
+      }
+    }
   }
 }

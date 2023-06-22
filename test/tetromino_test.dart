@@ -37,24 +37,24 @@ main() {
       ]);
     });
 
-    // test("rotate 4 x 1 tetromino at right boundary", () {
-    //   var tetromino = Tetromino([
-    //     Domino(position: Vector2(180, 0)),
-    //     Domino(position: Vector2(180, 20)),
-    //     Domino(position: Vector2(180, 40)),
-    //     Domino(position: Vector2(180, 60)),
-    //   ]);
-    //
-    //
-    //   tetromino.rotate();
-    //
-    //   expect(tetromino.dominoes.map((domino) => domino.position), [
-    //     Vector2(0, 0),
-    //     Vector2(0, 0),
-    //     Vector2(0, 0),
-    //     Vector2(0, 0),
-    //   ]);
-    // });
+    test("rotate 4 x 1 tetromino at right boundary", () {
+      var tetromino = Tetromino([
+        Domino(position: Vector2(180, 0)),
+        Domino(position: Vector2(180, 20)),
+        Domino(position: Vector2(180, 40)),
+        Domino(position: Vector2(180, 60)),
+      ]);
+
+
+      tetromino.rotate();
+
+      expect(tetromino.dominoes.map((domino) => domino.position), [
+        Vector2(120, 0),
+        Vector2(140, 0),
+        Vector2(160, 0),
+        Vector2(180, 0),
+      ]);
+    });
 
     test("rotate 1 x 4 tetromino should be 4 x 1 tetromino", () {
       var tetromino = Tetromino([
