@@ -57,16 +57,20 @@ main() {
     // });
 
     test("rotate 1 x 4 tetromino should be 4 x 1 tetromino", () {
-      var tetromino = Tetromino(TetrominoIGenerator().getDominoes());
+      var tetromino = Tetromino([
+          Domino(position: Vector2(40, 20)),
+          Domino(position: Vector2(60, 20)),
+          Domino(position: Vector2(80, 20)),
+          Domino(position: Vector2(100, 20)),
+        ]);
 
-      tetromino.rotate();
       tetromino.rotate();
 
       expect(tetromino.dominoes.map((domino) => domino.position), [
-        Vector2(0, 0),
-        Vector2(0, 20),
-        Vector2(0, 40),
-        Vector2(0, 60),
+        Vector2(40, 20),
+        Vector2(40, 40),
+        Vector2(40, 60),
+        Vector2(40, 80),
       ]);
     });
   });

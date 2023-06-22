@@ -46,16 +46,17 @@ class Tetromino {
     if (dominoes
         .every((domino) => domino.column == dominoes.elementAt(0).column)) {
       var dp = dominoes.elementAt(0).position;
-      dominoes.elementAt(1).position = Vector2(dp.x + 20, dp.y );
-      dominoes.elementAt(2).position = Vector2(dp.x + 40, dp.y );
-      dominoes.elementAt(3).position = Vector2(dp.x + 60, dp.y );
+      dominoes.elementAt(1).position = Vector2(dp.x + 20, dp.y);
+      dominoes.elementAt(2).position = Vector2(dp.x + 40, dp.y);
+      dominoes.elementAt(3).position = Vector2(dp.x + 60, dp.y);
       return;
     }
     if (dominoes
         .every((domino) => domino.floor == dominoes.elementAt(0).floor)) {
-      for (var domino in dominoes) {
-        domino.position = Vector2(domino.position.y, domino.position.x);
-      }
+      var dp = dominoes.elementAt(0).position;
+      dominoes.elementAt(1).position = Vector2(dp.x, dp.y + 20);
+      dominoes.elementAt(2).position = Vector2(dp.x, dp.y + 40);
+      dominoes.elementAt(3).position = Vector2(dp.x, dp.y + 60);
     }
 
     // var column = dominoes.map((domino) => domino.position.x - 180).reduce(max);
