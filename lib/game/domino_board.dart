@@ -8,7 +8,6 @@ import 'package:flutter_tetris/game/tetromino.dart';
 class DominoBoard extends Component
     with HasGameRef<TetrisGame>, KeyboardHandler {
   static const int _column = 10;
-  static const int _row = 20;
 
   final DominoGenerator _dominoGenerator;
 
@@ -39,11 +38,9 @@ class DominoBoard extends Component
   }
 
   Iterable<Domino> _getStoppedDominoes() =>
-      children.whereType<Domino>().where((domino) => domino.isStop);
+      children.whereType<Domino>().where((domino) => domino.isStop).toList();
 
   int _eliminateCount = 0;
-
-  int get _lastRow => _row - 1;
 
   int get dominoCount => children.length + _eliminateCount * _column;
 
