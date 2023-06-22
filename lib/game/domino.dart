@@ -68,6 +68,4 @@ class Domino extends RectangleComponent with HasGameRef<TetrisGame> {
   void moveToNextFloor() {
     position.y += _dominoSize;
   }
-
-
 }

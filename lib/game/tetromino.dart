@@ -80,17 +80,27 @@ class Tetromino {
       dominoes.elementAt(3).position = Vector2(dp.x - 40, dp.y + 20);
     }
 
-    var column = dominoes.map((domino) => domino.position.x - 180).reduce(max);
-    if (column > 0) {
+    _adjustIfOutOfRightBoundary();
+
+    _adjustIfOutOfLeftBoundary();
+  }
+
+  void _adjustIfOutOfLeftBoundary() {
+    var rowDiffWithBoundary =
+        dominoes.map((domino) => 0 - domino.position.x).reduce(max);
+    if (rowDiffWithBoundary > 0) {
       for (var domino in dominoes) {
-        domino.position.x -= column;
+        domino.position.x += rowDiffWithBoundary;
       }
     }
+  }
 
-    var row = dominoes.map((domino) => 0 - domino.position.x).reduce(max);
-    if (row > 0) {
+  void _adjustIfOutOfRightBoundary() {
+    var rowDiffWithBoundary =
+        dominoes.map((domino) => domino.position.x - 180).reduce(max);
+    if (rowDiffWithBoundary > 0) {
       for (var domino in dominoes) {
-        domino.position.x += row;
+        domino.position.x -= rowDiffWithBoundary;
       }
     }
   }
