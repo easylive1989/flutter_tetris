@@ -21,6 +21,8 @@ enum TetrominoType {
   sHorizontal,
   sVertical,
   none,
+  jUp,
+  jRight,
 }
 
 final Map<TetrominoType, List<Vector2>> tetrominoOffsets = {
@@ -28,8 +30,14 @@ final Map<TetrominoType, List<Vector2>> tetrominoOffsets = {
   TetrominoType.i1x4: [Vector2(20, 0), Vector2(40, 0), Vector2(60, 0)],
   TetrominoType.zHorizontal: [Vector2(20, 0), Vector2(20, 20), Vector2(40, 20)],
   TetrominoType.zVertical: [Vector2(0, 20), Vector2(-20, 20), Vector2(-20, 40)],
-  TetrominoType.sHorizontal: [Vector2(-20, 0), Vector2(-20, 20), Vector2(-40, 20)],
+  TetrominoType.sHorizontal: [
+    Vector2(-20, 0),
+    Vector2(-20, 20),
+    Vector2(-40, 20)
+  ],
   TetrominoType.sVertical: [Vector2(0, 20), Vector2(20, 20), Vector2(20, 40)],
+  TetrominoType.jUp: [Vector2(20, 0), Vector2(40, 0), Vector2(40, 20)],
+  TetrominoType.jRight: [Vector2(0, 20), Vector2(0, 40), Vector2(-20, 40)],
 };
 
 TetrominoType getType(List<Domino> dominoes) {
