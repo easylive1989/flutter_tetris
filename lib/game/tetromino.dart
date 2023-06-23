@@ -50,7 +50,7 @@ class Tetromino {
   }
 
   void rotate() {
-    var type = getType(dominoes);
+    var type = TetrominoType.from(dominoes);
     if (type == TetrominoType.i4x1) {
       updateOffset(TetrominoType.i1x4, dominoes);
     } else if (type == TetrominoType.i1x4) {

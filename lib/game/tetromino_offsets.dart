@@ -35,7 +35,20 @@ enum TetrominoType {
   tUp,
   tRight,
   tDown,
-  tLeft,
+  tLeft;
+
+  static TetrominoType from(List<Domino> dominoes) {
+    var offsets = dominoes.map((domino) {
+      return domino.position - dominoes[0].position;
+    });
+
+    for (var entry in tetrominoOffsets.entries) {
+      if (const UnorderedIterableEquality().equals(entry.value, offsets)) {
+        return entry.key;
+      }
+    }
+    return TetrominoType.none;
+  }
 }
 
 final Map<TetrominoType, List<Vector2>> tetrominoOffsets = {
@@ -154,18 +167,6 @@ final Map<TetrominoType, List<Vector2>> tetrominoOffsets = {
     Vector2(-20, 20)
   ],
 };
-
-TetrominoType getType(List<Domino> dominoes) {
-  var offsets =
-      dominoes.map((domino) => domino.position - dominoes[0].position);
-
-  for (var entry in tetrominoOffsets.entries) {
-    if (const UnorderedIterableEquality().equals(entry.value, offsets)) {
-      return entry.key;
-    }
-  }
-  return TetrominoType.none;
-}
 
 void updateOffset(TetrominoType type, List<Domino> dominoes) {
   for (int index = 0; index < 4; index++) {
