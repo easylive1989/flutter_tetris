@@ -319,4 +319,24 @@ main() {
       ]);
     });
   });
+
+  group("rotate T", () {
+    test("rotate T Up", () {
+      var tetromino = Tetromino([
+        Domino(position: Vector2(80, 20)),
+        Domino(position: Vector2(60, 40)),
+        Domino(position: Vector2(80, 40)),
+        Domino(position: Vector2(100, 40)),
+      ]);
+
+      tetromino.rotate();
+
+      expect(tetromino.dominoes.map((domino) => domino.position), [
+        Vector2(80, 20),
+        Vector2(80, 40),
+        Vector2(80, 60),
+        Vector2(100, 40),
+      ]);
+    });
+  });
 }
