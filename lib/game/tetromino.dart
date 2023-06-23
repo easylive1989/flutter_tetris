@@ -56,16 +56,10 @@ class Tetromino {
       updateOffset(TetrominoType.i1x4, dominoes);
     } else if (type == TetrominoType.i1x4) {
       updateOffset(TetrominoType.i4x1, dominoes);
-    } else if (floorGroup.length == 2 && columnGroup.length == 3 && isZ) {
-      var dp = dominoes.elementAt(0).position;
-      dominoes.elementAt(1).position = Vector2(dp.x, dp.y + 20);
-      dominoes.elementAt(2).position = Vector2(dp.x - 20, dp.y + 20);
-      dominoes.elementAt(3).position = Vector2(dp.x - 20, dp.y + 40);
-    } else if (floorGroup.length == 3 && columnGroup.length == 2 && !isZ) {
-      var dp = dominoes.elementAt(0).position;
-      dominoes.elementAt(1).position = Vector2(dp.x + 20, dp.y);
-      dominoes.elementAt(2).position = Vector2(dp.x + 20, dp.y + 20);
-      dominoes.elementAt(3).position = Vector2(dp.x + 40, dp.y + 20);
+    } else if (type == TetrominoType.zHorizontal) {
+      updateOffset(TetrominoType.zVertical, dominoes);
+    } else if (type == TetrominoType.zVertical) {
+      updateOffset(TetrominoType.zHorizontal, dominoes);
     } else if (floorGroup.length == 2 && columnGroup.length == 3 && !isZ) {
       var dp = dominoes.elementAt(0).position;
       dominoes.elementAt(1).position = Vector2(dp.x, dp.y + 20);
