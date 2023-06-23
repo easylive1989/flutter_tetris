@@ -59,20 +59,22 @@ class TetrominoIGenerator extends DominoGenerator {
 class TetrominoJGenerator extends DominoGenerator {
   @override
   void generate(Component board) {
-    board.add(Domino(position: Vector2(0, 0)));
-    board.add(Domino(position: Vector2(0, 20)));
-    board.add(Domino(position: Vector2(20, 20)));
-    board.add(Domino(position: Vector2(40, 20)));
+    board.addAll([
+      Domino(position: Vector2(0, 0)),
+      ...tetrominoOffsets[TetrominoType.jUp]!
+          .map((offset) => Domino(position: offset)),
+    ]);
   }
 }
 
 class TetrominoLGenerator extends DominoGenerator {
   @override
   void generate(Component board) {
-    board.add(Domino(position: Vector2(40, 0)));
-    board.add(Domino(position: Vector2(0, 20)));
-    board.add(Domino(position: Vector2(20, 20)));
-    board.add(Domino(position: Vector2(40, 20)));
+    board.addAll([
+      Domino(position: Vector2(0, 0)),
+      ...tetrominoOffsets[TetrominoType.lUp]!
+          .map((offset) => Domino(position: offset)),
+    ]);
   }
 }
 
