@@ -89,6 +89,25 @@ main() {
       expect(dominoes[3].position, Vector2(0, 280));
     },
   );
+
+  testWithGame(
+    "domino can not move down when domino reach the bottom",
+    () => FlameGame(),
+    (game) async {
+      var dominoBoard = DominoBoard(TetrominoIGenerator());
+      await game.ensureAdd(dominoBoard);
+
+      game.update(16);
+      dominoBoard.onKeyEvent(MockRawKeyEvent(), {LogicalKeyboardKey.arrowDown});
+      dominoBoard.onKeyEvent(MockRawKeyEvent(), {LogicalKeyboardKey.arrowDown});
+
+      var dominoes = getDominoes(dominoBoard);
+      expect(dominoes[0].position, Vector2(0, 320));
+      expect(dominoes[1].position, Vector2(0, 340));
+      expect(dominoes[2].position, Vector2(0, 360));
+      expect(dominoes[3].position, Vector2(0, 380));
+    },
+  );
 }
 
 List<Domino> getDominoes(DominoBoard board) =>
