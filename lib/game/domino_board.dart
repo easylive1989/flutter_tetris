@@ -25,15 +25,15 @@ class DominoBoard extends Component
   bool onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
     var movingTetromino = _getMovingTetromino();
     var stoppedDominoes = _getStoppedDominoes();
-    if (event.isKeyPressed(LogicalKeyboardKey.arrowRight) &&
+    if (keysPressed.contains(LogicalKeyboardKey.arrowRight) &&
         movingTetromino.isRightOfBoundary &&
         !movingTetromino.isRightOf(stoppedDominoes.dominoes)) {
       movingTetromino.moveRight();
-    } else if (event.isKeyPressed(LogicalKeyboardKey.arrowLeft) &&
+    } else if (keysPressed.contains(LogicalKeyboardKey.arrowLeft) &&
         movingTetromino.isLeftOfBoundary &&
         !movingTetromino.isLeftOf(stoppedDominoes.dominoes)) {
       movingTetromino.moveLeft();
-    } else if (event.isKeyPressed(LogicalKeyboardKey.arrowUp)) {
+    } else if (keysPressed.contains(LogicalKeyboardKey.arrowUp)) {
       movingTetromino.rotate();
     }
 
