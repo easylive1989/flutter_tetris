@@ -15,6 +15,87 @@ import 'package:flutter_tetris/game/domino.dart';
 //     []        []      [][][]      []
 //   [][][]      [][]      []      [][]
 //               []                  []
+class Shape {
+  final List<Vector2> offsets;
+
+  Shape(this.offsets);
+
+  @override
+  bool operator ==(Object other) =>
+      other is Shape &&
+      const UnorderedIterableEquality().equals(offsets, other.offsets);
+
+  @override
+  int get hashCode => const UnorderedIterableEquality().hash(offsets);
+}
+
+abstract class TType {
+  Shape get current;
+
+  Shape get next;
+
+  static TType from(List<Domino> dominoes) {
+    var offsets = Shape(dominoes.map((domino) {
+      return domino.position - dominoes[0].position;
+    }).toList());
+
+    if (ITetrominoType.all.contains(offsets)) {
+      return ITetrominoType(offsets);
+    }
+
+    throw ArgumentError();
+  }
+
+  static void rotate(List<Domino> dominoes) {
+    var nextShape = TType.from(dominoes).next;
+
+    for (int index = 0; index < 4; index++) {
+      dominoes[index].position =
+          dominoes[0].position + nextShape.offsets[index];
+    }
+  }
+}
+
+class NoneTetrominoType implements TType {
+  @override
+  Shape get current => Shape([]);
+
+  @override
+  Shape get next => Shape([]);
+}
+
+class ITetrominoType implements TType {
+  static final i4x1 =
+      Shape([Vector2(0, 0), Vector2(0, 20), Vector2(0, 40), Vector2(0, 60)]);
+  static final i1x4 =
+      Shape([Vector2(0, 0), Vector2(20, 0), Vector2(40, 0), Vector2(60, 0)]);
+
+  static List<Shape> get all => [i4x1, i1x4];
+
+  @override
+  final Shape current;
+
+  ITetrominoType(this.current);
+
+  @override
+  Shape get next => all[(all.indexOf(current) + 1) % all.length];
+}
+
+class OTetrominoType implements TType {
+  static final o =
+      Shape([Vector2(0, 0), Vector2(0, 20), Vector2(20, 0), Vector2(20, 20)]);
+
+  @override
+  final Shape current;
+
+  OTetrominoType(this.current);
+
+  static List<Shape> get all => [o];
+
+  @override
+  Shape get next => all[(all.indexOf(current) + 1) % all.length];
+}
+
 enum TetrominoType {
   i4x1,
   i1x4,

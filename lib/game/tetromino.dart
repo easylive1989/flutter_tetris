@@ -52,9 +52,11 @@ class Tetromino {
   void rotate() {
     var type = TetrominoType.from(dominoes);
     if (type == TetrominoType.i4x1) {
-      TetrominoType.i1x4.apply(dominoes);
+      TType.rotate(dominoes);
+      // TetrominoType.i1x4.apply(dominoes);
     } else if (type == TetrominoType.i1x4) {
-      TetrominoType.i4x1.apply(dominoes);
+      TType.rotate(dominoes);
+      // TetrominoType.i4x1.apply(dominoes);
     } else if (type == TetrominoType.zHorizontal) {
       TetrominoType.zVertical.apply(dominoes);
     } else if (type == TetrominoType.zVertical) {
