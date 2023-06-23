@@ -78,7 +78,7 @@ class TetrominoSGenerator extends DominoGenerator {
   @override
   void generate(Component board) {
     board.addAll(
-      tetrominoOffsets[TetrominoType.sHorizontal]!
+      tetrominoOffsets[TetrominoType.sVertical]!
           .map((offset) => Domino(position: offset, color: Colors.green)),
     );
   }
@@ -88,7 +88,7 @@ class TetrominoTGenerator extends DominoGenerator {
   @override
   void generate(Component board) {
     board.addAll(
-      tetrominoOffsets[TetrominoType.tUp]!
+      tetrominoOffsets[TetrominoType.tDown]!
           .map((offset) => Domino(position: offset, color: Colors.purple)),
     );
   }
