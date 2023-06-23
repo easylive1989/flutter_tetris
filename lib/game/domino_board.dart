@@ -39,6 +39,9 @@ class DominoBoard extends Component
       if (movingTetromino.isLastFloor) {
         return super.onKeyEvent(event, keysPressed);
       }
+      if (movingTetromino.isTopOf(stoppedDominoes.dominoes)) {
+        return super.onKeyEvent(event, keysPressed);
+      }
       movingTetromino.moveToNextFloor();
     }
 

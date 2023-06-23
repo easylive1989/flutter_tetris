@@ -108,6 +108,23 @@ main() {
       expect(dominoes[3].position, Vector2(0, 380));
     },
   );
+
+  testWithGame(
+    "domino can not move down when domino reach another domino",
+    () => FlameGame(),
+    (game) async {
+      var dominoBoard = DominoBoard(TetrominoIGenerator());
+      await game.ensureAdd(dominoBoard);
+
+      game.update(16);
+      game.update(0);
+      game.update(12);
+      dominoBoard.onKeyEvent(MockRawKeyEvent(), {LogicalKeyboardKey.arrowDown});
+
+      var dominoes = getDominoes(dominoBoard);
+      expect(dominoes[4].position, Vector2(0, 240));
+    },
+  );
 }
 
 List<Domino> getDominoes(DominoBoard board) =>
