@@ -1,7 +1,7 @@
 import 'package:flutter_tetris/game/domino.dart';
 import 'dart:math';
 
-import 'package:flutter_tetris/game/tetromino_offsets.dart';
+import 'package:flutter_tetris/game/tetromino/tetromino_type_group.dart';
 
 class Tetromino {
   final List<Domino> dominoes;
@@ -50,7 +50,7 @@ class Tetromino {
   }
 
   void rotate() {
-    TetrominoType.rotate(dominoes);
+    TetrominoTypeGroup.rotate(dominoes);
 
     _adjustIfOutOfRightBoundary();
 
