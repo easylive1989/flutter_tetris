@@ -10,7 +10,7 @@ import 'package:flutter_tetris/game/domino.dart';
 //    jUp    jRight  jDown   jLeft   lUp    lLeft   lDown   lRight
 //   [][][]    []    []       [][]  [][][]  [][]        []    []
 //       []    []    [][][]   []    []        []    [][][]    []
-//           [][]             []              []            [][]
+//           [][]             []              []              [][]
 //
 enum TetrominoType {
   i4x1,
