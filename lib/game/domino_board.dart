@@ -35,6 +35,8 @@ class DominoBoard extends Component
       movingTetromino.moveLeft();
     } else if (keysPressed.contains(LogicalKeyboardKey.arrowUp)) {
       movingTetromino.rotate();
+    } else if (keysPressed.contains(LogicalKeyboardKey.arrowDown)) {
+      movingTetromino.moveToNextFloor();
     }
 
     return super.onKeyEvent(event, keysPressed);

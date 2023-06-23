@@ -70,6 +70,26 @@ main() {
       expect(dominoes[3].position, Vector2(60, 200));
     },
   );
+
+  testWithGame(
+    "domino should move down when press key down",
+    () => FlameGame(),
+    (game) async {
+      var dominoBoard = DominoBoard(TetrominoIGenerator());
+      await game.ensureAdd(dominoBoard);
+
+      game.update(10);
+      dominoBoard.onKeyEvent(MockRawKeyEvent(), {
+        LogicalKeyboardKey.arrowDown,
+      });
+
+      var dominoes = getDominoes(dominoBoard);
+      expect(dominoes[0].position, Vector2(0, 220));
+      expect(dominoes[1].position, Vector2(0, 240));
+      expect(dominoes[2].position, Vector2(0, 260));
+      expect(dominoes[3].position, Vector2(0, 280));
+    },
+  );
 }
 
 List<Domino> getDominoes(DominoBoard board) =>

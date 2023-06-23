@@ -1,6 +1,3 @@
-import 'package:collection/collection.dart';
-import 'package:flame/components.dart';
-import 'package:flame/src/game/notifying_vector2.dart';
 import 'package:flutter_tetris/game/domino.dart';
 import 'dart:math';
 
@@ -43,6 +40,12 @@ class Tetromino {
   void moveLeft() {
     for (var domino in dominoes) {
       domino.moveLeft();
+    }
+  }
+
+  void moveToNextFloor() {
+    for (var domino in dominoes) {
+      domino.moveToNextFloor();
     }
   }
 
@@ -110,4 +113,5 @@ class Tetromino {
       }
     }
   }
+
 }
