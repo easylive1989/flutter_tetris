@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:flame/components.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_tetris/game/domino.dart';
+import 'package:flutter_tetris/game/tetromino_offsets.dart';
 
 abstract class DominoGenerator {
   void generate(Component board);
@@ -37,11 +37,11 @@ class TetrominoOGenerator extends DominoGenerator {
   @override
   void generate(Component board) {
     board.addAll([
-        Domino(position: Vector2(0, 0)),
-        Domino(position: Vector2(0, 20)),
-        Domino(position: Vector2(20, 0)),
-        Domino(position: Vector2(20, 20)),
-      ]);
+      Domino(position: Vector2(0, 0)),
+      Domino(position: Vector2(0, 20)),
+      Domino(position: Vector2(20, 0)),
+      Domino(position: Vector2(20, 20)),
+    ]);
   }
 }
 
@@ -50,9 +50,8 @@ class TetrominoIGenerator extends DominoGenerator {
   void generate(Component board) {
     board.addAll([
       Domino(position: Vector2(0, 0)),
-      Domino(position: Vector2(0, 20)),
-      Domino(position: Vector2(0, 40)),
-      Domino(position: Vector2(0, 60)),
+      ...tetrominoOffsets[TetrominoType.i4x1]!
+          .map((offset) => Domino(position: offset)),
     ]);
   }
 }
@@ -80,10 +79,11 @@ class TetrominoLGenerator extends DominoGenerator {
 class TetrominoSGenerator extends DominoGenerator {
   @override
   void generate(Component board) {
-    board.add(Domino(position: Vector2(20, 0)));
-    board.add(Domino(position: Vector2(40, 0)));
-    board.add(Domino(position: Vector2(0, 20)));
-    board.add(Domino(position: Vector2(20, 20)));
+    board.addAll([
+      Domino(position: Vector2(0, 0)),
+      ...tetrominoOffsets[TetrominoType.sHorizontal]!
+          .map((offset) => Domino(position: offset)),
+    ]);
   }
 }
 
@@ -100,9 +100,10 @@ class TetrominoTGenerator extends DominoGenerator {
 class TetrominoZGenerator extends DominoGenerator {
   @override
   void generate(Component board) {
-    board.add(Domino(position: Vector2(0, 0)));
-    board.add(Domino(position: Vector2(20, 0)));
-    board.add(Domino(position: Vector2(20, 20)));
-    board.add(Domino(position: Vector2(40, 20)));
+    board.addAll([
+      Domino(position: Vector2(0, 0)),
+      ...tetrominoOffsets[TetrominoType.zHorizontal]!
+          .map((offset) => Domino(position: offset)),
+    ]);
   }
 }
