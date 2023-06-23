@@ -50,7 +50,7 @@ class Tetromino {
   }
 
   void rotate() {
-    TType.rotate(dominoes);
+    TetrominoType.rotate(dominoes);
 
     _adjustIfOutOfRightBoundary();
 
