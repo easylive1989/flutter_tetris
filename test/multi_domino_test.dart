@@ -2,9 +2,9 @@ import 'package:flame/game.dart';
 import 'package:flame_test/flame_test.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_tetris/game/domino.dart';
-import 'package:flutter_tetris/game/domino_board.dart';
-import 'package:flutter_tetris/game/domino_generator.dart';
+import 'package:flutter_tetris/game/component/domino/domino.dart';
+import 'package:flutter_tetris/game/component/domino/domino_board.dart';
+import 'package:flutter_tetris/game/component/domino/domino_generator.dart';
 import 'package:mocktail/mocktail.dart';
 
 main() {

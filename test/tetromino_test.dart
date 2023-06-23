@@ -1,7 +1,7 @@
 import 'package:flame/components.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_tetris/game/domino.dart';
-import 'package:flutter_tetris/game/tetromino.dart';
+import 'package:flutter_tetris/game/component/domino/domino.dart';
+import 'package:flutter_tetris/game/tetromino/tetromino.dart';
 
 main() {
   test("rotate O tetromino should keep same style", () {

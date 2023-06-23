@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_tetris/game/domino.dart';
-import 'package:flutter_tetris/game/tetromino/tetromino_typ_group_impl.dart';
+import 'package:flutter_tetris/game/component/domino/domino.dart';
+import 'package:flutter_tetris/game/tetromino_type/tetromino_typ_group_impl.dart';
 
 abstract class DominoGenerator {
   void generate(Component board);

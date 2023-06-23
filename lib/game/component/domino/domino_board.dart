@@ -1,10 +1,10 @@
 import 'package:flame/components.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_tetris/game/domino.dart';
-import 'package:flutter_tetris/game/domino_generator.dart';
-import 'package:flutter_tetris/game/stopped_dominoes.dart';
+import 'package:flutter_tetris/game/component/domino/domino.dart';
+import 'package:flutter_tetris/game/component/domino/domino_generator.dart';
+import 'package:flutter_tetris/game/tetromino/stopped_dominoes.dart';
 import 'package:flutter_tetris/game/tetris_game.dart';
-import 'package:flutter_tetris/game/tetromino.dart';
+import 'package:flutter_tetris/game/tetromino/tetromino.dart';
 
 class DominoBoard extends Component
     with HasGameRef<TetrisGame>, KeyboardHandler {

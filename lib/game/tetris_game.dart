@@ -2,10 +2,10 @@ import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_tetris/game/domino_board.dart';
-import 'package:flutter_tetris/game/domino_board_border.dart';
-import 'package:flutter_tetris/game/domino_generator.dart';
-import 'package:flutter_tetris/game/score.dart';
+import 'package:flutter_tetris/game/component/domino/domino_board.dart';
+import 'package:flutter_tetris/game/component/hud/domino_board_border.dart';
+import 'package:flutter_tetris/game/component/domino/domino_generator.dart';
+import 'package:flutter_tetris/game/component/hud/score.dart';
 
 class TetrisGame extends FlameGame with HasKeyboardHandlerComponents {
   DominoGenerator? _dominoGenerator;

@@ -1,6 +1,6 @@
 import 'package:flame/components.dart';
-import 'package:flutter_tetris/game/tetromino/tetromino_type.dart';
-import 'package:flutter_tetris/game/tetromino/tetromino_type_group.dart';
+import 'package:flutter_tetris/game/tetromino_type/tetromino_type.dart';
+import 'package:flutter_tetris/game/tetromino_type/tetromino_type_group.dart';
 
 //  i4x1      i1x4
 //    []    [][][][]

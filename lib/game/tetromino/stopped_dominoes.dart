@@ -1,4 +1,4 @@
-import 'package:flutter_tetris/game/domino.dart';
+import 'package:flutter_tetris/game/component/domino/domino.dart';
 
 class StoppedDominoes {
   final Iterable<Domino> dominoes;

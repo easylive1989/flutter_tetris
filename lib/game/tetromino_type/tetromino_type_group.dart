@@ -1,6 +1,6 @@
-import 'package:flutter_tetris/game/domino.dart';
-import 'package:flutter_tetris/game/tetromino/tetromino_type.dart';
-import 'package:flutter_tetris/game/tetromino/tetromino_typ_group_impl.dart';
+import 'package:flutter_tetris/game/component/domino/domino.dart';
+import 'package:flutter_tetris/game/tetromino_type/tetromino_type.dart';
+import 'package:flutter_tetris/game/tetromino_type/tetromino_typ_group_impl.dart';
 
 abstract class TetrominoTypeGroup {
   final TetrominoType current;
