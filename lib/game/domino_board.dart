@@ -54,17 +54,20 @@ class DominoBoard extends Component
     var tetromino = _getMovingTetromino();
     var stoppedDominoes = _getStoppedDominoes();
 
-    if (tetromino.isLastFloor || tetromino.isTopOf(stoppedDominoes.dominoes)) {
-      tetromino.stop();
-      for (var domino in tetromino.dominoes) {
-        var latestStoppedDominoes = _getStoppedDominoes().getByFloor(domino.floor);
-        if (latestStoppedDominoes.length == _column) {
-          _eliminate(latestStoppedDominoes);
-          _adjustDominoPosition(domino.floor);
-        }
-      }
-      _dominoGenerator.generate(this);
+    if (!tetromino.isLastFloor &&
+        !tetromino.isTopOf(stoppedDominoes.dominoes)) {
+      return;
     }
+
+    tetromino.stop();
+    for (var domino in tetromino.dominoes) {
+      var newStoppedDominoes = _getStoppedDominoes().getByFloor(domino.floor);
+      if (newStoppedDominoes.length == _column) {
+        _eliminate(newStoppedDominoes);
+        _adjustDominoPosition(domino.floor);
+      }
+    }
+    _dominoGenerator.generate(this);
   }
 
   void _adjustDominoPosition(int eliminateRow) {
