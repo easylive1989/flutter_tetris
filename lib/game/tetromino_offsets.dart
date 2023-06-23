@@ -37,6 +37,7 @@ enum TetrominoType {
 }
 
 final Map<TetrominoType, List<Vector2>> tetrominoOffsets = {
+  TetrominoType.o: [Vector2(0, 20), Vector2(20, 0), Vector2(20, 20)],
   TetrominoType.i4x1: [Vector2(0, 20), Vector2(0, 40), Vector2(0, 60)],
   TetrominoType.i1x4: [Vector2(20, 0), Vector2(40, 0), Vector2(60, 0)],
   TetrominoType.zHorizontal: [Vector2(20, 0), Vector2(20, 20), Vector2(40, 20)],
