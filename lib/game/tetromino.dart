@@ -52,41 +52,41 @@ class Tetromino {
   void rotate() {
     var type = TetrominoType.from(dominoes);
     if (type == TetrominoType.i4x1) {
-      updateOffset(TetrominoType.i1x4, dominoes);
+      TetrominoType.i1x4.apply(dominoes);
     } else if (type == TetrominoType.i1x4) {
-      updateOffset(TetrominoType.i4x1, dominoes);
+      TetrominoType.i4x1.apply(dominoes);
     } else if (type == TetrominoType.zHorizontal) {
-      updateOffset(TetrominoType.zVertical, dominoes);
+      TetrominoType.zVertical.apply(dominoes);
     } else if (type == TetrominoType.zVertical) {
-      updateOffset(TetrominoType.zHorizontal, dominoes);
+      TetrominoType.zHorizontal.apply(dominoes);
     } else if (type == TetrominoType.sHorizontal) {
-      updateOffset(TetrominoType.sVertical, dominoes);
+      TetrominoType.sVertical.apply(dominoes);
     } else if (type == TetrominoType.sVertical) {
-      updateOffset(TetrominoType.sHorizontal, dominoes);
+      TetrominoType.sHorizontal.apply(dominoes);
     } else if (type == TetrominoType.jUp) {
-      updateOffset(TetrominoType.jRight, dominoes);
+      TetrominoType.jRight.apply(dominoes);
     } else if (type == TetrominoType.jRight) {
-      updateOffset(TetrominoType.jDown, dominoes);
-    } else if (type ==TetrominoType.jDown) {
-      updateOffset(TetrominoType.jLeft, dominoes);
+      TetrominoType.jDown.apply(dominoes);
+    } else if (type == TetrominoType.jDown) {
+      TetrominoType.jLeft.apply(dominoes);
     } else if (type == TetrominoType.jLeft) {
-      updateOffset(TetrominoType.jUp, dominoes);
+      TetrominoType.jUp.apply(dominoes);
     } else if (type == TetrominoType.lUp) {
-      updateOffset(TetrominoType.lLeft, dominoes);
+      TetrominoType.lLeft.apply(dominoes);
     } else if (type == TetrominoType.lLeft) {
-      updateOffset(TetrominoType.lDown, dominoes);
+      TetrominoType.lDown.apply(dominoes);
     } else if (type == TetrominoType.lDown) {
-      updateOffset(TetrominoType.lRight, dominoes);
+      TetrominoType.lRight.apply(dominoes);
     } else if (type == TetrominoType.lRight) {
-      updateOffset(TetrominoType.lUp, dominoes);
+      TetrominoType.lUp.apply(dominoes);
     } else if (type == TetrominoType.tUp) {
-      updateOffset(TetrominoType.tRight, dominoes);
+      TetrominoType.tRight.apply(dominoes);
     } else if (type == TetrominoType.tRight) {
-      updateOffset(TetrominoType.tDown, dominoes);
+      TetrominoType.tDown.apply(dominoes);
     } else if (type == TetrominoType.tDown) {
-      updateOffset(TetrominoType.tLeft, dominoes);
+      TetrominoType.tLeft.apply(dominoes);
     } else if (type == TetrominoType.tLeft) {
-      updateOffset(TetrominoType.tUp, dominoes);
+      TetrominoType.tUp.apply(dominoes);
     }
 
     _adjustIfOutOfRightBoundary();
@@ -113,5 +113,4 @@ class Tetromino {
       }
     }
   }
-
 }

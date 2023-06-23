@@ -37,6 +37,13 @@ enum TetrominoType {
   tDown,
   tLeft;
 
+  void apply(List<Domino> dominoes) {
+    for (int index = 0; index < 4; index++) {
+      dominoes[index].position =
+          dominoes[0].position + tetrominoOffsets[this]![index];
+    }
+  }
+
   static TetrominoType from(List<Domino> dominoes) {
     var offsets = dominoes.map((domino) {
       return domino.position - dominoes[0].position;
@@ -167,10 +174,3 @@ final Map<TetrominoType, List<Vector2>> tetrominoOffsets = {
     Vector2(-20, 20)
   ],
 };
-
-void updateOffset(TetrominoType type, List<Domino> dominoes) {
-  for (int index = 0; index < 4; index++) {
-    dominoes[index].position =
-        dominoes[0].position + tetrominoOffsets[type]![index];
-  }
-}
