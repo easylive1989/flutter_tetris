@@ -209,5 +209,23 @@ main() {
         Vector2(120, 40),
       ]);
     });
+
+    test("rotate J Down", () {
+      var tetromino = Tetromino([
+        Domino(position: Vector2(80, 20)),
+        Domino(position: Vector2(80, 40)),
+        Domino(position: Vector2(100, 40)),
+        Domino(position: Vector2(120, 40)),
+      ]);
+
+      tetromino.rotate();
+
+      expect(tetromino.dominoes.map((domino) => domino.position), [
+        Vector2(80, 20),
+        Vector2(100, 20),
+        Vector2(80, 40),
+        Vector2(80, 60),
+      ]);
+    });
   });
 }
