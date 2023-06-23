@@ -2,14 +2,24 @@ import 'package:collection/collection.dart';
 import 'package:flame/components.dart';
 import 'package:flutter_tetris/game/domino.dart';
 
+//  i4x1      i1x4        o        zHorizontal    zVertical
+//    []    [][][][]    [][]          [][]            []
+//    []                [][]            [][]        [][]
+//    []                                            []
+//    []
+//  sHorizontal    sVertical
+//     [][]          []
+//   [][]            [][]
+//                     []
+//
 enum TetrominoType {
   i4x1,
   i1x4,
   o,
   zHorizontal,
   zVertical,
-  s3x2,
-  s2x3,
+  sHorizontal,
+  sVertical,
   none,
 }
 
