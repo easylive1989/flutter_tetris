@@ -98,7 +98,7 @@ class TetrominoZGenerator extends DominoGenerator {
   @override
   void generate(Component board) {
     board.addAll(
-      ZTypeGroup.zVertical.offsets
+      ZTypeGroup.zHorizontal.offsets
           .map((offset) => Domino(position: offset, color: Colors.red)),
     );
   }
