@@ -38,7 +38,7 @@ class TetrominoOGenerator extends DominoGenerator {
   @override
   void generate(Component board) {
     board.addAll(
-      tetrominoOffsets[TetrominoType.o]!
+      OTetrominoType.o.offsets
           .map((offset) => Domino(position: offset, color: Colors.yellow)),
     );
   }
@@ -48,7 +48,7 @@ class TetrominoIGenerator extends DominoGenerator {
   @override
   void generate(Component board) {
     board.addAll(
-      tetrominoOffsets[TetrominoType.i4x1]!
+      ITetrominoType.i4x1.offsets
           .map((offset) => Domino(position: offset, color: Colors.cyanAccent)),
     );
   }
@@ -58,7 +58,7 @@ class TetrominoJGenerator extends DominoGenerator {
   @override
   void generate(Component board) {
     board.addAll(
-      tetrominoOffsets[TetrominoType.jUp]!
+      JTetrominoType.jUp.offsets
           .map((offset) => Domino(position: offset, color: Colors.indigo)),
     );
   }
@@ -68,7 +68,7 @@ class TetrominoLGenerator extends DominoGenerator {
   @override
   void generate(Component board) {
     board.addAll(
-      tetrominoOffsets[TetrominoType.lUp]!
+      LTetrominoType.lUp.offsets
           .map((offset) => Domino(position: offset, color: Colors.orange)),
     );
   }
@@ -78,7 +78,7 @@ class TetrominoSGenerator extends DominoGenerator {
   @override
   void generate(Component board) {
     board.addAll(
-      tetrominoOffsets[TetrominoType.sVertical]!
+      STetrominoType.sVertical.offsets
           .map((offset) => Domino(position: offset, color: Colors.green)),
     );
   }
@@ -88,7 +88,7 @@ class TetrominoTGenerator extends DominoGenerator {
   @override
   void generate(Component board) {
     board.addAll(
-      tetrominoOffsets[TetrominoType.tDown]!
+      TTetrominoType.tDown.offsets
           .map((offset) => Domino(position: offset, color: Colors.purple)),
     );
   }
@@ -98,7 +98,7 @@ class TetrominoZGenerator extends DominoGenerator {
   @override
   void generate(Component board) {
     board.addAll(
-      tetrominoOffsets[TetrominoType.zHorizontal]!
+      ZTetrominoType.zVertical.offsets
           .map((offset) => Domino(position: offset, color: Colors.red)),
     );
   }

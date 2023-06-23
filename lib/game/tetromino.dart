@@ -51,46 +51,6 @@ class Tetromino {
 
   void rotate() {
     TType.rotate(dominoes);
-    // var type = TetrominoType.from(dominoes);
-    // if (type == TetrominoType.i4x1) {
-    //   TType.rotate(dominoes);
-    //   // TetrominoType.i1x4.apply(dominoes);
-    // } else if (type == TetrominoType.i1x4) {
-    //   TType.rotate(dominoes);
-    //   // TetrominoType.i4x1.apply(dominoes);
-    // } else if (type == TetrominoType.zHorizontal) {
-    //   TetrominoType.zVertical.apply(dominoes);
-    // } else if (type == TetrominoType.zVertical) {
-    //   TetrominoType.zHorizontal.apply(dominoes);
-    // } else if (type == TetrominoType.sHorizontal) {
-    //   TetrominoType.sVertical.apply(dominoes);
-    // } else if (type == TetrominoType.sVertical) {
-    //   TetrominoType.sHorizontal.apply(dominoes);
-    // } else if (type == TetrominoType.jUp) {
-    //   TetrominoType.jRight.apply(dominoes);
-    // } else if (type == TetrominoType.jRight) {
-    //   TetrominoType.jDown.apply(dominoes);
-    // } else if (type == TetrominoType.jDown) {
-    //   TetrominoType.jLeft.apply(dominoes);
-    // } else if (type == TetrominoType.jLeft) {
-    //   TetrominoType.jUp.apply(dominoes);
-    // } else if (type == TetrominoType.lUp) {
-    //   TetrominoType.lLeft.apply(dominoes);
-    // } else if (type == TetrominoType.lLeft) {
-    //   TetrominoType.lDown.apply(dominoes);
-    // } else if (type == TetrominoType.lDown) {
-    //   TetrominoType.lRight.apply(dominoes);
-    // } else if (type == TetrominoType.lRight) {
-    //   TetrominoType.lUp.apply(dominoes);
-    // } else if (type == TetrominoType.tUp) {
-    //   TetrominoType.tRight.apply(dominoes);
-    // } else if (type == TetrominoType.tRight) {
-    //   TetrominoType.tDown.apply(dominoes);
-    // } else if (type == TetrominoType.tDown) {
-    //   TetrominoType.tLeft.apply(dominoes);
-    // } else if (type == TetrominoType.tLeft) {
-    //   TetrominoType.tUp.apply(dominoes);
-    // }
 
     _adjustIfOutOfRightBoundary();
 
