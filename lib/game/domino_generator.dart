@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flame/components.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_tetris/game/domino.dart';
 import 'package:flutter_tetris/game/tetromino_offsets.dart';
 
@@ -37,9 +38,9 @@ class TetrominoOGenerator extends DominoGenerator {
   @override
   void generate(Component board) {
     board.addAll([
-      Domino(position: Vector2(0, 0)),
+      Domino(position: Vector2(0, 0), color: Colors.yellow),
       ...tetrominoOffsets[TetrominoType.o]!
-          .map((offset) => Domino(position: offset)),
+          .map((offset) => Domino(position: offset, color: Colors.yellow)),
     ]);
   }
 }
@@ -48,9 +49,9 @@ class TetrominoIGenerator extends DominoGenerator {
   @override
   void generate(Component board) {
     board.addAll([
-      Domino(position: Vector2(0, 0)),
+      Domino(position: Vector2(0, 0), color: Colors.cyanAccent),
       ...tetrominoOffsets[TetrominoType.i4x1]!
-          .map((offset) => Domino(position: offset)),
+          .map((offset) => Domino(position: offset, color: Colors.cyanAccent)),
     ]);
   }
 }
@@ -59,9 +60,9 @@ class TetrominoJGenerator extends DominoGenerator {
   @override
   void generate(Component board) {
     board.addAll([
-      Domino(position: Vector2(0, 0)),
+      Domino(position: Vector2(0, 0), color: Colors.indigo),
       ...tetrominoOffsets[TetrominoType.jUp]!
-          .map((offset) => Domino(position: offset)),
+          .map((offset) => Domino(position: offset, color: Colors.indigo)),
     ]);
   }
 }
@@ -70,9 +71,9 @@ class TetrominoLGenerator extends DominoGenerator {
   @override
   void generate(Component board) {
     board.addAll([
-      Domino(position: Vector2(0, 0)),
+      Domino(position: Vector2(0, 0), color: Colors.orange),
       ...tetrominoOffsets[TetrominoType.lUp]!
-          .map((offset) => Domino(position: offset)),
+          .map((offset) => Domino(position: offset, color: Colors.orange)),
     ]);
   }
 }
@@ -81,9 +82,9 @@ class TetrominoSGenerator extends DominoGenerator {
   @override
   void generate(Component board) {
     board.addAll([
-      Domino(position: Vector2(0, 0)),
+      Domino(position: Vector2(0, 0), color: Colors.green),
       ...tetrominoOffsets[TetrominoType.sHorizontal]!
-          .map((offset) => Domino(position: offset)),
+          .map((offset) => Domino(position: offset, color: Colors.green)),
     ]);
   }
 }
@@ -92,9 +93,9 @@ class TetrominoTGenerator extends DominoGenerator {
   @override
   void generate(Component board) {
     board.addAll([
-      Domino(position: Vector2(0, 0)),
+      Domino(position: Vector2(0, 0), color: Colors.purple),
       ...tetrominoOffsets[TetrominoType.tUp]!
-          .map((offset) => Domino(position: offset)),
+          .map((offset) => Domino(position: offset, color: Colors.purple)),
     ]);
   }
 }
@@ -103,9 +104,9 @@ class TetrominoZGenerator extends DominoGenerator {
   @override
   void generate(Component board) {
     board.addAll([
-      Domino(position: Vector2(0, 0)),
+      Domino(position: Vector2(0, 0), color: Colors.red),
       ...tetrominoOffsets[TetrominoType.zHorizontal]!
-          .map((offset) => Domino(position: offset)),
+          .map((offset) => Domino(position: offset, color: Colors.red)),
     ]);
   }
 }

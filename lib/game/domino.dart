@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:flame/components.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_tetris/game/tetris_game.dart';
 
 class Domino extends RectangleComponent with HasGameRef<TetrisGame> {
@@ -7,7 +10,9 @@ class Domino extends RectangleComponent with HasGameRef<TetrisGame> {
   double _totalDelta = 0;
   bool _isStop = false;
 
-  Domino({super.position}) : super(size: Vector2(_dominoSize, _dominoSize));
+  Domino({super.position, Color color = Colors.white}) : super(size: Vector2(_dominoSize, _dominoSize)) {
+    paint = Paint()..color = color;
+  }
 
   int get floor => (position.y / _dominoSize).floor();
 
