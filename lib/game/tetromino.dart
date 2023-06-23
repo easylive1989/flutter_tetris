@@ -47,10 +47,6 @@ class Tetromino {
   }
 
   void rotate() {
-    var floorGroup = groupBy(dominoes, (domino) => domino.floor);
-    var columnGroup = groupBy(dominoes, (domino) => domino.column);
-    bool isZ =
-        dominoes.elementAt(0).position.x < dominoes.elementAt(3).position.x;
     var type = getType(dominoes);
     if (type == TetrominoType.i4x1) {
       updateOffset(TetrominoType.i1x4, dominoes);
@@ -60,16 +56,10 @@ class Tetromino {
       updateOffset(TetrominoType.zVertical, dominoes);
     } else if (type == TetrominoType.zVertical) {
       updateOffset(TetrominoType.zHorizontal, dominoes);
-    } else if (floorGroup.length == 2 && columnGroup.length == 3 && !isZ) {
-      var dp = dominoes.elementAt(0).position;
-      dominoes.elementAt(1).position = Vector2(dp.x, dp.y + 20);
-      dominoes.elementAt(2).position = Vector2(dp.x + 20, dp.y + 20);
-      dominoes.elementAt(3).position = Vector2(dp.x + 20, dp.y + 40);
-    } else if (floorGroup.length == 3 && columnGroup.length == 2 && isZ) {
-      var dp = dominoes.elementAt(0).position;
-      dominoes.elementAt(1).position = Vector2(dp.x - 20, dp.y);
-      dominoes.elementAt(2).position = Vector2(dp.x - 20, dp.y + 20);
-      dominoes.elementAt(3).position = Vector2(dp.x - 40, dp.y + 20);
+    } else if (type == TetrominoType.sHorizontal) {
+      updateOffset(TetrominoType.sVertical, dominoes);
+    } else if (type == TetrominoType.sVertical) {
+      updateOffset(TetrominoType.sHorizontal, dominoes);
     }
 
     _adjustIfOutOfRightBoundary();
