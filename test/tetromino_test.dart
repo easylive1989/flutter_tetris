@@ -22,14 +22,14 @@ main() {
     ]);
   });
 
-  group("rotate I tetromino", (){
+  group("rotate I tetromino", () {
     test("rotate 4 x 1 tetromino should be 1 x 4 tetromino", () {
-        var tetromino = Tetromino([
-          Domino(position: Vector2(20, 40)),
-          Domino(position: Vector2(20, 60)),
-          Domino(position: Vector2(20, 80)),
-          Domino(position: Vector2(20, 100)),
-        ]);
+      var tetromino = Tetromino([
+        Domino(position: Vector2(20, 40)),
+        Domino(position: Vector2(20, 60)),
+        Domino(position: Vector2(20, 80)),
+        Domino(position: Vector2(20, 100)),
+      ]);
 
       tetromino.rotate();
 
@@ -49,7 +49,6 @@ main() {
         Domino(position: Vector2(180, 60)),
       ]);
 
-
       tetromino.rotate();
 
       expect(tetromino.dominoes.map((domino) => domino.position), [
@@ -62,11 +61,11 @@ main() {
 
     test("rotate 1 x 4 tetromino should be 4 x 1 tetromino", () {
       var tetromino = Tetromino([
-          Domino(position: Vector2(40, 20)),
-          Domino(position: Vector2(60, 20)),
-          Domino(position: Vector2(80, 20)),
-          Domino(position: Vector2(100, 20)),
-        ]);
+        Domino(position: Vector2(40, 20)),
+        Domino(position: Vector2(60, 20)),
+        Domino(position: Vector2(80, 20)),
+        Domino(position: Vector2(100, 20)),
+      ]);
 
       tetromino.rotate();
 
@@ -135,7 +134,7 @@ main() {
     });
   });
 
-  group("rotate S tetromino", (){
+  group("rotate S tetromino", () {
     test("rotate horizontal S", () {
       var tetromino = Tetromino([
         Domino(position: Vector2(80, 20)),
@@ -246,4 +245,25 @@ main() {
       ]);
     });
   });
+
+  group("rotate L", () {
+    test("rotate L Up", () {
+      var tetromino = Tetromino([
+        Domino(position: Vector2(80, 20)),
+        Domino(position: Vector2(100, 20)),
+        Domino(position: Vector2(120, 20)),
+        Domino(position: Vector2(80, 40)),
+      ]);
+
+      tetromino.rotate();
+
+      expect(tetromino.dominoes.map((domino) => domino.position), [
+        Vector2(80, 20),
+        Vector2(100, 20),
+        Vector2(100, 40),
+        Vector2(100, 60),
+      ]);
+    });
+  });
+
 }
