@@ -70,6 +70,8 @@ class Tetromino {
       updateOffset(TetrominoType.jUp, dominoes);
     } else if (type == TetrominoType.lUp) {
       updateOffset(TetrominoType.lLeft, dominoes);
+    } else if (type == TetrominoType.lLeft) {
+      updateOffset(TetrominoType.lDown, dominoes);
     }
 
     _adjustIfOutOfRightBoundary();
