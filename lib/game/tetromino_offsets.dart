@@ -33,39 +33,131 @@ enum TetrominoType {
   lDown,
   lRight,
   tUp,
-  tRight, tDown, tLeft,
+  tRight,
+  tDown,
+  tLeft,
 }
 
 final Map<TetrominoType, List<Vector2>> tetrominoOffsets = {
-  TetrominoType.o: [Vector2(0, 20), Vector2(20, 0), Vector2(20, 20)],
-  TetrominoType.i4x1: [Vector2(0, 20), Vector2(0, 40), Vector2(0, 60)],
-  TetrominoType.i1x4: [Vector2(20, 0), Vector2(40, 0), Vector2(60, 0)],
-  TetrominoType.zHorizontal: [Vector2(20, 0), Vector2(20, 20), Vector2(40, 20)],
-  TetrominoType.zVertical: [Vector2(0, 20), Vector2(-20, 20), Vector2(-20, 40)],
+  TetrominoType.o: [
+    Vector2(0, 0),
+    Vector2(0, 20),
+    Vector2(20, 0),
+    Vector2(20, 20)
+  ],
+  TetrominoType.i4x1: [
+    Vector2(0, 0),
+    Vector2(0, 20),
+    Vector2(0, 40),
+    Vector2(0, 60)
+  ],
+  TetrominoType.i1x4: [
+    Vector2(0, 0),
+    Vector2(20, 0),
+    Vector2(40, 0),
+    Vector2(60, 0)
+  ],
+  TetrominoType.zHorizontal: [
+    Vector2(0, 0),
+    Vector2(20, 0),
+    Vector2(20, 20),
+    Vector2(40, 20)
+  ],
+  TetrominoType.zVertical: [
+    Vector2(0, 0),
+    Vector2(0, 20),
+    Vector2(-20, 20),
+    Vector2(-20, 40)
+  ],
   TetrominoType.sHorizontal: [
+    Vector2(0, 0),
     Vector2(-20, 0),
+    Vector2(-20, 20),
+    Vector2(-40, 20),
+  ],
+  TetrominoType.sVertical: [
+    Vector2(0, 0),
+    Vector2(0, 20),
+    Vector2(20, 20),
+    Vector2(20, 40)
+  ],
+  TetrominoType.jUp: [
+    Vector2(0, 0),
+    Vector2(20, 0),
+    Vector2(40, 0),
+    Vector2(40, 20)
+  ],
+  TetrominoType.jRight: [
+    Vector2(0, 0),
+    Vector2(0, 20),
+    Vector2(0, 40),
+    Vector2(-20, 40)
+  ],
+  TetrominoType.jDown: [
+    Vector2(0, 0),
+    Vector2(0, 20),
+    Vector2(20, 20),
+    Vector2(40, 20)
+  ],
+  TetrominoType.jLeft: [
+    Vector2(0, 0),
+    Vector2(20, 0),
+    Vector2(0, 20),
+    Vector2(0, 40)
+  ],
+  TetrominoType.lUp: [
+    Vector2(0, 0),
+    Vector2(20, 0),
+    Vector2(40, 0),
+    Vector2(0, 20)
+  ],
+  TetrominoType.lLeft: [
+    Vector2(0, 0),
+    Vector2(20, 0),
+    Vector2(20, 20),
+    Vector2(20, 40)
+  ],
+  TetrominoType.lDown: [
+    Vector2(0, 0),
+    Vector2(0, 20),
     Vector2(-20, 20),
     Vector2(-40, 20)
   ],
-  TetrominoType.sVertical: [Vector2(0, 20), Vector2(20, 20), Vector2(20, 40)],
-  TetrominoType.jUp: [Vector2(20, 0), Vector2(40, 0), Vector2(40, 20)],
-  TetrominoType.jRight: [Vector2(0, 20), Vector2(0, 40), Vector2(-20, 40)],
-  TetrominoType.jDown: [Vector2(0, 20), Vector2(20, 20), Vector2(40, 20)],
-  TetrominoType.jLeft: [Vector2(20, 0), Vector2(0, 20), Vector2(0, 40)],
-  TetrominoType.lUp: [Vector2(20, 0), Vector2(40, 0), Vector2(0, 20)],
-  TetrominoType.lLeft: [Vector2(20, 0), Vector2(20, 20), Vector2(20, 40)],
-  TetrominoType.lDown: [Vector2(0, 20), Vector2(-20, 20), Vector2(-40, 20)],
-  TetrominoType.lRight: [Vector2(0, 20), Vector2(0, 40), Vector2(20, 40)],
-  TetrominoType.tUp: [Vector2(-20, 20), Vector2(0, 20), Vector2(20, 20)],
-  TetrominoType.tRight: [Vector2(0, 20), Vector2(0, 40), Vector2(20, 20)],
-  TetrominoType.tDown: [Vector2(20, 0), Vector2(40, 0), Vector2(20, 20)],
-  TetrominoType.tLeft: [Vector2(0, 20), Vector2(0, 40), Vector2(-20, 20)],
+  TetrominoType.lRight: [
+    Vector2(0, 0),
+    Vector2(0, 20),
+    Vector2(0, 40),
+    Vector2(20, 40)
+  ],
+  TetrominoType.tUp: [
+    Vector2(0, 0),
+    Vector2(-20, 20),
+    Vector2(0, 20),
+    Vector2(20, 20)
+  ],
+  TetrominoType.tRight: [
+    Vector2(0, 0),
+    Vector2(0, 20),
+    Vector2(0, 40),
+    Vector2(20, 20)
+  ],
+  TetrominoType.tDown: [
+    Vector2(0, 0),
+    Vector2(20, 0),
+    Vector2(40, 0),
+    Vector2(20, 20)
+  ],
+  TetrominoType.tLeft: [
+    Vector2(0, 0),
+    Vector2(0, 20),
+    Vector2(0, 40),
+    Vector2(-20, 20)
+  ],
 };
 
 TetrominoType getType(List<Domino> dominoes) {
-  var offsets = dominoes
-      .sublist(1, 4)
-      .map((domino) => domino.position - dominoes[0].position);
+  var offsets =
+      dominoes.map((domino) => domino.position - dominoes[0].position);
 
   for (var entry in tetrominoOffsets.entries) {
     if (const UnorderedIterableEquality().equals(entry.value, offsets)) {
@@ -76,8 +168,8 @@ TetrominoType getType(List<Domino> dominoes) {
 }
 
 void updateOffset(TetrominoType type, List<Domino> dominoes) {
-  for (int index = 1; index < 4; index++) {
+  for (int index = 0; index < 4; index++) {
     dominoes[index].position =
-        dominoes[0].position + tetrominoOffsets[type]![index - 1];
+        dominoes[0].position + tetrominoOffsets[type]![index];
   }
 }
