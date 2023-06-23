@@ -39,8 +39,20 @@ abstract class TType {
       return domino.position - dominoes[0].position;
     }).toList());
 
-    if (ITetrominoType.all.contains(offsets)) {
+    if (OTetrominoType.all.contains(offsets)) {
+      return OTetrominoType(offsets);
+    } else if (ITetrominoType.all.contains(offsets)) {
       return ITetrominoType(offsets);
+    } else if (JTetrominoType.all.contains(offsets)) {
+      return JTetrominoType(offsets);
+    } else if (LTetrominoType.all.contains(offsets)) {
+      return LTetrominoType(offsets);
+    } else if (STetrominoType.all.contains(offsets)) {
+      return STetrominoType(offsets);
+    } else if (ZTetrominoType.all.contains(offsets)) {
+      return ZTetrominoType(offsets);
+    } else if (TTetrominoType.all.contains(offsets)) {
+      return TTetrominoType(offsets);
     }
 
     throw ArgumentError();
@@ -54,14 +66,6 @@ abstract class TType {
           dominoes[0].position + nextShape.offsets[index];
     }
   }
-}
-
-class NoneTetrominoType implements TType {
-  @override
-  Shape get current => Shape([]);
-
-  @override
-  Shape get next => Shape([]);
 }
 
 class ITetrominoType implements TType {
@@ -91,6 +95,116 @@ class OTetrominoType implements TType {
   OTetrominoType(this.current);
 
   static List<Shape> get all => [o];
+
+  @override
+  Shape get next => all[(all.indexOf(current) + 1) % all.length];
+}
+
+class STetrominoType implements TType {
+  static final sHorizontal = Shape(
+    [Vector2(0, 0), Vector2(-20, 0), Vector2(-20, 20), Vector2(-40, 20)],
+  );
+  static final sVertical = Shape(
+    [Vector2(0, 0), Vector2(0, 20), Vector2(20, 20), Vector2(20, 40)],
+  );
+
+  @override
+  final Shape current;
+
+  STetrominoType(this.current);
+
+  static List<Shape> get all => [sHorizontal, sVertical];
+
+  @override
+  Shape get next => all[(all.indexOf(current) + 1) % all.length];
+}
+
+class ZTetrominoType implements TType {
+  static final zHorizontal =
+      Shape([Vector2(0, 0), Vector2(20, 0), Vector2(20, 20), Vector2(40, 20)]);
+  static final zVertical = Shape(
+      [Vector2(0, 0), Vector2(0, 20), Vector2(-20, 20), Vector2(-20, 40)]);
+
+  @override
+  final Shape current;
+
+  ZTetrominoType(this.current);
+
+  static List<Shape> get all => [zHorizontal, zVertical];
+
+  @override
+  Shape get next => all[(all.indexOf(current) + 1) % all.length];
+}
+
+class LTetrominoType implements TType {
+  static final lUp = Shape(
+    [Vector2(0, 0), Vector2(20, 0), Vector2(40, 0), Vector2(0, 20)],
+  );
+  static final lLeft = Shape(
+    [Vector2(0, 0), Vector2(20, 0), Vector2(20, 20), Vector2(20, 40)],
+  );
+  static final lDown = Shape(
+    [Vector2(0, 0), Vector2(0, 20), Vector2(-20, 20), Vector2(-40, 20)],
+  );
+  static final lRight = Shape(
+    [Vector2(0, 0), Vector2(0, 20), Vector2(0, 40), Vector2(20, 40)],
+  );
+  @override
+  final Shape current;
+
+  LTetrominoType(this.current);
+
+  static List<Shape> get all => [lUp, lLeft, lDown, lRight];
+
+  @override
+  Shape get next => all[(all.indexOf(current) + 1) % all.length];
+}
+
+class JTetrominoType implements TType {
+  static final jUp = Shape(
+    [Vector2(0, 0), Vector2(20, 0), Vector2(40, 0), Vector2(40, 20)],
+  );
+  static final jRight = Shape(
+    [Vector2(0, 0), Vector2(0, 20), Vector2(0, 40), Vector2(-20, 40)],
+  );
+  static final jDown = Shape(
+    [Vector2(0, 0), Vector2(0, 20), Vector2(20, 20), Vector2(40, 20)],
+  );
+  static final jLeft = Shape(
+    [Vector2(0, 0), Vector2(20, 0), Vector2(0, 20), Vector2(0, 40)],
+  );
+
+  @override
+  final Shape current;
+
+  JTetrominoType(this.current);
+
+  static List<Shape> get all => [jUp, jRight, jDown, jLeft];
+
+  @override
+  Shape get next => all[(all.indexOf(current) + 1) % all.length];
+}
+
+class TTetrominoType implements TType {
+  static final tUp = Shape(
+    [Vector2(0, 0), Vector2(-20, 20), Vector2(0, 20), Vector2(20, 20)],
+  );
+  static final tRight = Shape(
+    [Vector2(0, 0), Vector2(0, 20), Vector2(0, 40), Vector2(20, 20)],
+  );
+  static final tDown = Shape(
+    [Vector2(0, 0), Vector2(20, 0), Vector2(40, 0), Vector2(20, 20)],
+  );
+  static final tLeft = Shape(
+    [Vector2(0, 0), Vector2(0, 20), Vector2(0, 40), Vector2(-20, 20)],
+  );
+
+  @override
+  final Shape current;
+
+  TTetrominoType(this.current);
+
+  static List<Shape> get all => [tUp, tRight, tDown, tLeft];
 
   @override
   Shape get next => all[(all.indexOf(current) + 1) % all.length];
