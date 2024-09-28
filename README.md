@@ -6,7 +6,7 @@ A Tetris game built using Flutter and Flame game engine.
 
 This Tetris game is a practice piece, primarily used to familiarize with unit testing in Flame.
 
-## Acknowledgements
+## Requirements
 
 - [Flutter](https://flutter.dev/)
 - [Flame](https://flame-engine.org/)
