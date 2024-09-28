@@ -1,16 +1,21 @@
-# flutter_tetris
+# Flutter Tetris
 
-A new Flutter project.
+A Tetris game built using Flutter and Flame game engine.
 
-## Getting Started
+## Description
 
-This project is a starting point for a Flutter application.
+This Tetris game is a practice piece, primarily used to familiarize with unit testing in Flame.
 
-A few resources to get you started if this is your first Flutter project:
+## Acknowledgements
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- [Flutter](https://flutter.dev/)
+- [Flame](https://flame-engine.org/)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Contact
+
+For any inquiries, please contact the project maintainer at easylive1989@gmail.com.
+
+## Additional Resources
+
+- [Flutter Documentation](https://docs.flutter.dev/)
+- [Flame Documentation](https://docs.flame-engine.org/)
