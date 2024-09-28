@@ -1,6 +1,8 @@
 import 'package:flame/components.dart';
 
-class DominoBoardBorder extends Component {
+class DominoBoardBorder extends RectangleComponent {
+  DominoBoardBorder({super.position});
+
   @override
   Future onLoad() async {
     super.onLoad();

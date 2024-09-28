@@ -24,9 +24,16 @@ class TetrisGame extends FlameGame with HasKeyboardHandlerComponents {
   Future onLoad() async {
     super.onLoad();
 
-    add(DominoBoardBorder());
-    add(_dominoBoard = DominoBoard(_dominoGenerator!));
-    add(Score(margin: const EdgeInsets.only(top: 5, left: 210)));
+    var startPosition = size / 2 - Vector2(100, 200);
+    add(DominoBoardBorder(position: startPosition));
+    add(_dominoBoard = DominoBoard(_dominoGenerator!, position: startPosition));
+    // add(Score(margin: const EdgeInsets.only(top: 5, left: 210)));
+    add(Score(
+      margin: EdgeInsets.only(
+        top: startPosition.y + 5,
+        left: startPosition.x + 210,
+      ),
+    ));
   }
 
   Future restart() async {

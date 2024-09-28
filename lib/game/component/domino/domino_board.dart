@@ -6,13 +6,13 @@ import 'package:flutter_tetris/game/tetromino/stopped_dominoes.dart';
 import 'package:flutter_tetris/game/tetris_game.dart';
 import 'package:flutter_tetris/game/tetromino/tetromino.dart';
 
-class DominoBoard extends Component
+class DominoBoard extends RectangleComponent
     with HasGameRef<TetrisGame>, KeyboardHandler {
   static const int _column = 10;
 
   final DominoGenerator _dominoGenerator;
 
-  DominoBoard(DominoGenerator dominoGenerator)
+  DominoBoard(DominoGenerator dominoGenerator, {super.position})
       : _dominoGenerator = dominoGenerator;
 
   @override
